@@ -12,6 +12,10 @@ In terminal, run:
 
 python3 -m uvicorn main:app --reload
 
+Go to:
+http://localhost:8000/health
+
+
 🔹 Here’s what it means:
 Part	Meaning
 uvicorn	Runs your FastAPI app (it's the web server)
