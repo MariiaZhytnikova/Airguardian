@@ -40,7 +40,7 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 
 pip install fastapi uvicorn requests pydantic psycopg2-binary celery python-dotenv
 
-📦 STEP 1: FastAPI Basics
+## 📦 STEP 1: FastAPI Basics
 
 Create a file called main.py:
 
@@ -57,7 +57,7 @@ Run the API:
 uvicorn main:app --reload
 
 Visit: http://localhost:8000/health
-🧠 STEP 2: Understand the Requirements
+## 🧠 STEP 2: Understand the Requirements
 
 Here’s what you’ll build:
 Feature	Tools you'll use
@@ -68,7 +68,7 @@ Background processing	Celery + Redis
 Database	PostgreSQL
 Logging + error handling	Python logging, FastAPI features
 Protected endpoint	FastAPI + headers + .env
-🗃️ STEP 3: Setup Database (PostgreSQL)
+## 🗃️ STEP 3: Setup Database (PostgreSQL)
 
     Install PostgreSQL or use Docker.
 
@@ -91,7 +91,7 @@ SessionLocal = sessionmaker(bind=engine)
 
 Base = declarative_base()
 
-📌 STEP 4: Drone Model & Violation Logic
+## 📌 STEP 4: Drone Model & Violation Logic
 
 You’ll define a Violation table and write a function that:
 
@@ -101,7 +101,7 @@ You’ll define a Violation table and write a function that:
 
     If yes → get owner data and save in database.
 
-🔁 STEP 5: Background Task with Celery
+## 🔁 STEP 5: Background Task with Celery
 
     Install Redis and run it (you can use Docker).
 
@@ -109,20 +109,20 @@ You’ll define a Violation table and write a function that:
 
     Celery task will fetch drone data, detect violations, and store them.
 
-🌐 STEP 6: More API Endpoints
+## 🌐 STEP 6: More API Endpoints
 
     /drones → Fetches and returns live drone data.
 
     /nfz → Returns violations in the past 24h. Requires secret in header.
 
-🔒 STEP 7: .env File for Secret & DB URL
+## 🔒 STEP 7: .env File for Secret & DB URL
 
 Create a .env file:
 
 X_SECRET=supersecret123
 DATABASE_URL=postgresql://user:password@localhost/drone_db
 
-🔧 STEP 8: Error Handling & Logging
+## 🔧 STEP 8: Error Handling & Logging
 
 Use Python’s logging module and FastAPI’s RequestValidationError handlers.
 🔚 Final Result
