@@ -2,9 +2,9 @@
 A secure and ef- ficient system will ensure real-time detection of unauthorized drones, helping protect restricted airspace.
 
 
-pip install fastapi uvicorn requests pydantic psycopg2-binary celery python-dotenv
-pip3 install uvicorn
-
+pip install fastapi uvicorn requests pydantic psycopg2-binary celery python-dotenv   
+pip3 install uvicorn  
+pip3 install sqlalchemy psycopg2-binary python-dotenv  
 
 ▶️ Run the server
 
