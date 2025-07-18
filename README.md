@@ -122,10 +122,6 @@ Expected output:
 
     Create a database named e.g. drone_db.
 
-    Install SQLAlchemy to connect FastAPI to Postgres:
-
-pip install sqlalchemy
-
     Create database.py:
 
 from sqlalchemy import create_engine
@@ -138,6 +134,19 @@ engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
 
 Base = declarative_base()
+
+##### Next Steps 🚀
+
+Now you're ready to:
+
+    Define your violations table using SQLAlchemy ORM
+
+    Set up database.py to manage DB connection
+
+    Implement the Celery task to fetch drones
+
+    Start building your API endpoints
+    
 
 ## 📌 STEP 4: Drone Model & Violation Logic
 
