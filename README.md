@@ -1,152 +1,105 @@
 # Airguardian
 A secure and ef- ficient system will ensure real-time detection of unauthorized drones, helping protect restricted airspace.
 
-### Needed install
+### Install dependencies
 
-pip install fastapi uvicorn requests pydantic psycopg2-binary celery python-dotenv   
-pip3 install uvicorn  
-pip3 install sqlalchemy psycopg2-binary python-dotenv  
+    pip install fastapi uvicorn requests pydantic psycopg2-binary celery python-dotenv   
+    pip3 install uvicorn  
+    pip3 install sqlalchemy psycopg2-binary python-dotenv  
+
+## 📦 STEP 1: FastAPI
 
 ▶️ Run the server
 
 In terminal, run:
 
-python3 -m uvicorn main:app --reload
+    python3 -m uvicorn main:app --reload
 
 Go to:
-http://localhost:8000/health
+    http://localhost:8000/health
 
-
-🔹 Here’s what it means:
-Part	Meaning
-uvicorn	Runs your FastAPI app (it's the web server)
-main:app	main is the file name (main.py), app is the FastAPI instance inside it
---reload	Auto-reloads the server if you change the code (useful during development)
-
-✅ STEP-BY-STEP ROADMAP FOR BEGINNERS
-📍 Phase 0: Basic Setup
-
-You’ll need to install the necessary tools first.
-1. Create a project folder
-
-mkdir drone-nfz-backend
-cd drone-nfz-backend
-
-2. Create a virtual environment
-
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-
-3. Install required libraries
-
-pip install fastapi uvicorn requests pydantic psycopg2-binary celery python-dotenv
-
-## 📦 STEP 1: FastAPI Basics
-
-Create a file called main.py:
-
-from fastapi import FastAPI
-
-app = FastAPI()
-
-@app.get("/health")
-def health_check():
-    return {"success": "ok"}
-
-Run the API:
-
-uvicorn main:app --reload
-
-Visit: http://localhost:8000/health
-## 🧠 STEP 2: Understand the Requirements
-
-Here’s what you’ll build:
-Feature	Tools you'll use
-API backend	FastAPI
-Data models & validation	Pydantic
-Periodic data fetching	Celery + requests
-Background processing	Celery + Redis
-Database	PostgreSQL
-Logging + error handling	Python logging, FastAPI features
-Protected endpoint	FastAPI + headers + .env
-## 🗃️ STEP 3: Setup Database (PostgreSQL)
+## 🗃️ STEP 2: Setup Database (PostgreSQL)
 
     Run PostgreSQL in Docker
 
 If Docker works, run this command to start PostgreSQL:
 
-docker run --name drone-postgres \
-  -e POSTGRES_USER=drone_user \
-  -e POSTGRES_PASSWORD=mypassword \
-  -e POSTGRES_DB=drone_db \
-  -p 5432:5432 \
-  -d postgres
+    docker run --name drone-postgres \
+      -e POSTGRES_USER=drone_user \
+      -e POSTGRES_PASSWORD=mypassword \
+      -e POSTGRES_DB=drone_db \
+      -p 5432:5432 \
+      -d postgres
 
 This will:
 
-    Download the official PostgreSQL image
+  -  Download the official PostgreSQL image
 
-    Start a database container
+  -  Start a database container
 
-    Listen on port 5432
+  -  Listen on port 5432
 
-✅ Step 3: Add to your .env file
+✅ Update.env file
 
 Inside your project folder, add this:
 
-DATABASE_URL=postgresql://drone_user:12345@localhost:5432/drone_db
+    DATABASE_URL=postgresql://drone_user:12345@localhost:5432/drone_db
 
-✅ Step 4: Test the connection
+✅ Test the connection
 
 Once the container is running, test the DB from Python:
 
-###### test_db.py
-from sqlalchemy import create_engine
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-engine = create_engine(os.getenv("DATABASE_URL"))
-
-with engine.connect() as conn:
-    result = conn.execute("SELECT 1;")
-    print(result.fetchone())
+    Test py file: test_db.py
+    
+    from sqlalchemy import create_engine, text
+    from dotenv import load_dotenv
+    import os
+    
+    load_dotenv()
+    db_url = os.getenv("DATABASE_URL")
+    
+    engine = create_engine(db_url)
+    
+    with engine.connect() as conn:
+        result = conn.execute(text("SELECT 1;"))
+        print("✅ Connection successful. Result:", result.scalar())
 
 Run it:
 
-python3 test_db.py
+    python3 test_db.py
 
 Expected output:
 
-(1,)
+    (1,)
 
-    Create a database named e.g. drone_db.
+Create a database named drone_db.
 
-    Create database.py:
-
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
-import os
-
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@localhost/drone_db")
-
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(bind=engine)
-
-Base = declarative_base()
-
-##### Next Steps 🚀
-
-Now you're ready to:
-
-    Define your violations table using SQLAlchemy ORM
-
-    Set up database.py to manage DB connection
-
-    Implement the Celery task to fetch drones
-
-    Start building your API endpoints
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import sessionmaker, declarative_base
+    import os
     
+    DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@localhost/drone_db")
+    
+    engine = create_engine(DATABASE_URL)
+    SessionLocal = sessionmaker(bind=engine)
+    
+    Base = declarative_base()
+
+#### To stop PostgreSQL running in Docker, just use this command:
+
+    docker stop drone-postgres
+
+This stops the container named drone-postgres (the one you created earlier).
+
+If you ever want to start it again, use:
+
+    docker start drone-postgres
+
+You can check its status with:
+
+    docker ps -a
+
+
 
 ## 📌 STEP 4: Drone Model & Violation Logic
 
