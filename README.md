@@ -70,7 +70,54 @@ Logging + error handling	Python logging, FastAPI features
 Protected endpoint	FastAPI + headers + .env
 ## 🗃️ STEP 3: Setup Database (PostgreSQL)
 
-    Install PostgreSQL or use Docker.
+    Run PostgreSQL in Docker
+
+If Docker works, run this command to start PostgreSQL:
+
+docker run --name drone-postgres \
+  -e POSTGRES_USER=drone_user \
+  -e POSTGRES_PASSWORD=mypassword \
+  -e POSTGRES_DB=drone_db \
+  -p 5432:5432 \
+  -d postgres
+
+This will:
+
+    Download the official PostgreSQL image
+
+    Start a database container
+
+    Listen on port 5432
+
+✅ Step 3: Add to your .env file
+
+Inside your project folder, add this:
+
+DATABASE_URL=postgresql://drone_user:12345@localhost:5432/drone_db
+
+✅ Step 4: Test the connection
+
+Once the container is running, test the DB from Python:
+
+# test_db.py
+from sqlalchemy import create_engine
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+engine = create_engine(os.getenv("DATABASE_URL"))
+
+with engine.connect() as conn:
+    result = conn.execute("SELECT 1;")
+    print(result.fetchone())
+
+Run it:
+
+python3 test_db.py
+
+Expected output:
+
+(1,)
 
     Create a database named e.g. drone_db.
 
