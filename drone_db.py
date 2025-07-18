@@ -1,4 +1,5 @@
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
 from dotenv import load_dotenv
 import os
 
@@ -7,9 +8,6 @@ db_url = os.getenv("DATABASE_URL")
 
 engine = create_engine(db_url)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
 Base = declarative_base()
-
-with engine.connect() as conn:
-    result = conn.execute(text("SELECT 1;"))
-    print("✅ Connection successful. Result:", result.scalar())
+Base.metadata.create_all(bind=engine)
+print("Tables created.")
