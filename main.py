@@ -32,6 +32,11 @@ def list_violations(db: Session = Depends(get_db)):
 	return db.query(Violation).all()
 #########################################
 
+class ViolationInput(BaseModel):
+	owner_id: str
+	x: float
+	y: float
+	z: float
 
 #################################################################################
 @app.post("/violations")
