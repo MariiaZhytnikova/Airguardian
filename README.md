@@ -70,7 +70,7 @@ Run it:
 
 Expected output:
 
-    (1,)
+    ✅ Connection successful. Result: 1
 
 Create a database named drone_db.
 
