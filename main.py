@@ -1,10 +1,8 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 
-##################################
 from pydantic import BaseModel
 from datetime import datetime
-######################################
 
 ########### OWN ##########################
 from utils import fetch_owner
@@ -18,19 +16,16 @@ app = FastAPI()
 def health_check():
 	return {"success": "ok"}
 
-################################
 def get_db():
 	db = SessionLocal()
 	try:
 		yield db
 	finally:
 		db.close()
-###################################
-#########################################
+
 @app.get("/violations")
 def list_violations(db: Session = Depends(get_db)):
 	return db.query(Violation).all()
-#########################################
 
 class ViolationInput(BaseModel):
 	owner_id: str
@@ -38,6 +33,7 @@ class ViolationInput(BaseModel):
 	y: float
 	z: float
 
+########################################################################
 #################################################################################
 @app.post("/violations")
 def report_violation(data: ViolationInput, db: Session = Depends(get_db)):

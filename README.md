@@ -3,7 +3,7 @@ A secure and ef- ficient system will ensure real-time detection of unauthorized 
 
 ### Install dependencies
 
-    pip install fastapi uvicorn requests pydantic psycopg2-binary celery python-dotenv   
+    pip install fastapi uvicorn requests pydantic psycopg2-binary celery python-dotenv  
     pip3 install uvicorn  
     pip3 install sqlalchemy psycopg2-binary python-dotenv  
 
