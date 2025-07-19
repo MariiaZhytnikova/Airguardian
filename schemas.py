@@ -1,6 +1,15 @@
 from pydantic import BaseModel
 from datetime import datetime
 
+class ViolationInput(BaseModel):
+	owner_id: str
+	x: float
+	y: float
+	z: float
+
+	class Config:
+		orm_mode = True
+
 class OwnerOut(BaseModel):
 	first_name: str
 	last_name: str
