@@ -1,6 +1,22 @@
 # Airguardian
 A secure and ef- ficient system will ensure real-time detection of unauthorized drones, helping protect restricted airspace.
 
+
+### RUN
+
+existed docker
+
+	docker start drone-postgres
+
+app:
+
+	uvicorn main:app --reload 
+
+web:
+
+	http://localhost:8000
+
+
 ### Install dependencies
 
     pip install fastapi uvicorn requests pydantic psycopg2-binary celery python-dotenv  
