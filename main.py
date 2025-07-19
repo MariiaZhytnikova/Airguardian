@@ -4,12 +4,13 @@ from pydantic import BaseModel
 from datetime import datetime
 from typing import List
 from dotenv import load_dotenv
+#from routes.scan import router as scan_router
 import os
 
 ########### OWN ##########################
-from utils import fetch_owner
+from fetcher import fetch_drones, fetch_owner
 from drone_db import SessionLocal, engine
-from schemas import ViolationOut
+from schemas import ViolationOut, ViolationInput
 from model import Owner, Violation, Base
 ####################################
 
@@ -17,6 +18,8 @@ load_dotenv()
 X_SECRET = os.getenv("X_SECRET")
 
 app = FastAPI()
+
+#app.include_router(scan_router)
 
 @app.on_event("startup")
 def on_startup():
@@ -34,29 +37,88 @@ def get_db():
 	finally:
 		db.close()
 
-@app.get("/violations", response_model=List[ViolationOut])
-def list_violations(db: Session = Depends(get_db)):
-	violations = db.query(Violation).options(joinedload(Violation.owner)).all()
-	return violations
-
-class ViolationInput(BaseModel):
-	owner_id: str
-	x: float
-	y: float
-	z: float
+# @app.get("/nfz", response_model=List[ViolationOut])
+# def list_violations(db: Session = Depends(get_db)):
+# 	violations = db.query(Violation).options(joinedload(Violation.owner)).all()
+# 	return violations
 
 ########################################################################
+def is_in_no_fly_zone(x: float, y: float) -> bool:
+    return x ** 2 + y ** 2 <= 1000 ** 2
 
-@app.get("/nfz")
-def get_nfz(x_secret: str = Header(...)):
+@app.get("/nfz", response_model=List[ViolationOut])
+async def get_nfz(x_secret: str = Header(...)):
 	if x_secret != X_SECRET:
 		raise HTTPException(status_code=401, detail="Unauthorized")
 
 	# Example response data (replace with actual data logic)
-	return {"no_fly_zones": ["zone_a", "zone_b"]}
+	 # Fetch drone data from the external API (async HTTP request)
+	data = await fetch_drones()
+	print(">>> drones fetched:", data)
+
+	# Create a database session
+	db = SessionLocal()
+	# violations = [] 
+
+	# Iterate over the list of drones (adjust this if API structure differs)
+	for drone in data:
+		try:
+			x = drone["x"]
+			y = drone["y"]
+			z = drone.get("z", 0)
+			owner_id = drone.get("owner_id")
+
+			if owner_id is None:
+				print(f"Skipping drone due to missing owner_id: {drone}")
+				continue
+
+			# # Check if the drone is in the no-fly zone
+			# if is_in_no_fly_zone(x, y):
+			# 	print(f"Drone in restricted zone: x={x}, y={y}, z={z}, owner_id={owner_id}")
+
+			# 	# Create a violation record with the drone's data
+			# 	violation = Violation(
+			# 		x=x,
+			# 		y=y,
+			# 		z=z,
+			# 		owner_id=owner_id
+			# 	)
+			# 	report_violation(violation, db)
+
+			# 	owner = db.query(Owner).filter(Owner.id == owner_id).first()
+			# 	violations.append(ViolationOut(
+			# 		x=x, y=y, z=z, owner=owner, timestamp=datetime.utcnow()
+			# 	))
+						# Check if the drone is in the no-fly zone
+				# Create a violation record with the drone's data
+			violation_input = Violation(
+				x=x,
+				y=y,
+				z=z,
+				owner_id=owner_id
+			)
+			report_violation(violation_input, db)
+
+			# owner = db.query(Owner).filter(Owner.id == owner_id).first()
+			# owner_out = OwnerOut.from_orm(owner)
+			# violations.append(ViolationOut(
+			# 	x=x, y=y, z=z, owner=owner, timestamp=datetime.utcnow()
+			# ))
+
+		except KeyError as e:
+			print(f"Malformed drone entry skipped: missing {e} in {drone}")
+
+	# Save all pending inserts to the database
+	#db.commit()
+
+	# Close the database session
+	#db.close()
+
+	# Return a success message
+	return None
 
 #################################################################################
-@app.post("/violations")
+
 def report_violation(data: ViolationInput, db: Session = Depends(get_db)):
 	# 1. Try to find the owner in the database
 	owner = db.query(Owner).filter(Owner.id == data.owner_id).first()
