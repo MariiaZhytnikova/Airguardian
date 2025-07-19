@@ -1,36 +1,39 @@
-from fastapi import FastAPI, Depends
-from sqlalchemy.orm import Session
+from fastapi import FastAPI, Depends, HTTPException
+from sqlalchemy.orm import Session, joinedload
 
-##################################
 from pydantic import BaseModel
 from datetime import datetime
-######################################
+from typing import List
 
 ########### OWN ##########################
 from utils import fetch_owner
-from drone_db import SessionLocal
-from models import Violation
+from drone_db import SessionLocal, engine
+from schemas import ViolationOut
+from model import Owner, Violation, Base
 ####################################
 
 app = FastAPI()
+
+@app.on_event("startup")
+def on_startup():
+	Base.metadata.create_all(bind=engine)
+	print("🗃️ Tables created.")
 
 @app.get("/health")
 def health_check():
 	return {"success": "ok"}
 
-################################
 def get_db():
 	db = SessionLocal()
 	try:
 		yield db
 	finally:
 		db.close()
-###################################
-#########################################
-@app.get("/violations")
+
+@app.get("/violations", response_model=List[ViolationOut])
 def list_violations(db: Session = Depends(get_db)):
-	return db.query(Violation).all()
-#########################################
+	violations = db.query(Violation).options(joinedload(Violation.owner)).all()
+	return violations
 
 class ViolationInput(BaseModel):
 	owner_id: str
@@ -38,6 +41,7 @@ class ViolationInput(BaseModel):
 	y: float
 	z: float
 
+########################################################################
 #################################################################################
 @app.post("/violations")
 def report_violation(data: ViolationInput, db: Session = Depends(get_db)):
