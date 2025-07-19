@@ -18,6 +18,7 @@ class OwnerOut(BaseModel):
 
 	class Config:
 		orm_mode = True
+		from_attributes = True
 
 class ViolationOut(BaseModel):
 	owner_id: str
