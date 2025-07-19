@@ -8,8 +8,6 @@ load_dotenv()  # Make sure to load .env variables
 DRONES_API = os.getenv("DRONES_API")
 DRONES_LIST_API = os.getenv("DRONES_LIST_API")
 
-
-
 def fetch_owner(owner_id: str):
 	base_url = os.getenv("DRONES_API")
 	url = f"{base_url}{owner_id}"

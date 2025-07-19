@@ -41,16 +41,14 @@ def get_db():
 
 @app.get("/drones")
 async def proxy_drones():
-	async with httpx.AsyncClient() as client:
-		try:
-			response = await client.get(DRONES_LIST_API, timeout=10)
-			response.raise_for_status()
-		except httpx.RequestError as exc:
-			raise HTTPException(status_code=502, detail=f"Error contacting external drones API: {exc}")
-		except httpx.HTTPStatusError as exc:
-			raise HTTPException(status_code=exc.response.status_code, detail=f"External drones API error: {exc.response.text}")
+	try:
+		drones = await fetch_drones()
+	except httpx.RequestError as exc:
+		raise HTTPException(status_code=502, detail=f"Error contacting drones API: {exc}")
+	except httpx.HTTPStatusError as exc:
+		raise HTTPException(status_code=exc.response.status_code, detail=f"Drones API error: {exc.response.text}")
 
-	return response.json()
+	return drones
 ######################################################3
 
 
@@ -58,16 +56,20 @@ def is_in_no_fly_zone(x: float, y: float) -> bool:
 	return x ** 2 + y ** 2 <= 1000 ** 2
 
 @app.get("/nfz")
-async def get_nfz(x_secret: str = Header(...)):
+async def get_nfz(x_secret: str = Header(...), db: Session = Depends(get_db)):
 	if x_secret != X_SECRET:
 		raise HTTPException(status_code=401, detail="Unauthorized")
 
 	# Example response data (replace with actual data logic)
 	# Fetch drone data from the external API (async HTTP request)
-	data = await fetch_drones()
+	try:
+		data = await fetch_drones()
+	except httpx.RequestError as exc:
+		raise HTTPException(status_code=502, detail=f"Error contacting drones API: {exc}")
+	except httpx.HTTPStatusError as exc:
+		raise HTTPException(status_code=exc.response.status_code, detail=f"Drones API error: {exc.response.text}")
 
 	# Create a database session
-	db = SessionLocal()
 	violations = [] 
 
 	# Iterate over the list of drones (adjust this if API structure differs)
