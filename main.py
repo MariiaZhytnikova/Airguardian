@@ -1,9 +1,10 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Header
 from sqlalchemy.orm import Session, joinedload
-
 from pydantic import BaseModel
 from datetime import datetime
 from typing import List
+from dotenv import load_dotenv
+import os
 
 ########### OWN ##########################
 from utils import fetch_owner
@@ -11,6 +12,9 @@ from drone_db import SessionLocal, engine
 from schemas import ViolationOut
 from model import Owner, Violation, Base
 ####################################
+
+load_dotenv()
+X_SECRET = os.getenv("X_SECRET")
 
 app = FastAPI()
 
@@ -42,6 +46,15 @@ class ViolationInput(BaseModel):
 	z: float
 
 ########################################################################
+
+@app.get("/nfz")
+def get_nfz(x_secret: str = Header(...)):
+	if x_secret != X_SECRET:
+		raise HTTPException(status_code=401, detail="Unauthorized")
+
+	# Example response data (replace with actual data logic)
+	return {"no_fly_zones": ["zone_a", "zone_b"]}
+
 #################################################################################
 @app.post("/violations")
 def report_violation(data: ViolationInput, db: Session = Depends(get_db)):
