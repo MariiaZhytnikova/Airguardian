@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, HTTPException, Header
+from fastapi import FastAPI, Depends, HTTPException, Header, Query
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session, joinedload
 from datetime import datetime, timedelta
@@ -14,6 +14,8 @@ import httpx
 import os
 import io
 
+
+
 ########### OWN ##########################
 from fetcher import fetch_drones, fetch_owner
 from drone_db import SessionLocal, engine
@@ -21,6 +23,15 @@ from schemas import ViolationOut, ViolationInput, OwnerOut
 from model import Owner, Violation, Base
 from utils import get_db
 from tasks import scan_for_violations
+from logger import logger
+from error_handlers import (
+    validation_exception_handler,
+    http_exception_handler,
+    unhandled_exception_handler
+)
+from fastapi.exceptions import RequestValidationError
+from fastapi import HTTPException
+
 ####################################
 
 load_dotenv()
@@ -29,17 +40,21 @@ DRONES_LIST_API = os.getenv("DRONES_LIST_API")
 
 app = FastAPI()
 
-#################################################
+######################################################
+app.add_exception_handler(RequestValidationError, validation_exception_handler)
+app.add_exception_handler(HTTPException, http_exception_handler)
+app.add_exception_handler(Exception, unhandled_exception_handler)
+######################################################
+
 #Allows frontend js to communicate with FASTAPI backend
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # For development only
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+	CORSMiddleware,
+	allow_origins=["*"],  # For development only
+	allow_credentials=True,
+	allow_methods=["*"],
+	allow_headers=["*"],
 )
-
-#################################################
+######################################################
 
 @app.on_event("startup")
 def on_startup():
@@ -50,8 +65,19 @@ def on_startup():
 def health_check():
 	return {"success": "ok"}
 
+# @app.get("/drones")
+# async def proxy_drones():
+# 	try:
+# 		drones = await fetch_drones()
+# 	except httpx.RequestError as exc:
+# 		raise HTTPException(status_code=502, detail=f"Error contacting drones API: {exc}")
+# 	except httpx.HTTPStatusError as exc:
+# 		raise HTTPException(status_code=exc.response.status_code, detail=f"Drones API error: {exc.response.text}")
+
+# 	return drones
+logger.info("App starting...")
 @app.get("/drones")
-async def proxy_drones():
+async def proxy_drones(limit: int = Query(10, gt=0, le=100)):
 	try:
 		drones = await fetch_drones()
 	except httpx.RequestError as exc:
@@ -59,7 +85,8 @@ async def proxy_drones():
 	except httpx.HTTPStatusError as exc:
 		raise HTTPException(status_code=exc.response.status_code, detail=f"Drones API error: {exc.response.text}")
 
-	return drones
+	logger.info(f"Returning first {limit} drones")
+	return drones[:limit]
 
 # GET /nfz: Returns violations from the last 24 hours
 @app.get("/nfz")
@@ -140,8 +167,7 @@ async def map_image():
 
 		if dist <= NFZ_RADIUS:
 			try:
-				owner = await fetch_owner(serial)
-				owner_id = owner.get("pilotId", "unknown")
+				owner_id = drone["owner_id"]
 			except Exception:
 				owner_id = "unknown"
 
@@ -163,15 +189,15 @@ async def map_image():
 
 	return StreamingResponse(buf, media_type="image/png")
 
-@app.get("/nfz-dev")  # A temporary endpoint without header requirement
-def get_violations_dev(
-	db: Session = Depends(get_db)
-):
-	since = datetime.utcnow() - timedelta(hours=24)
-	violations = (
-		db.query(Violation)
-		.filter(Violation.timestamp >= since)
-		.options(joinedload(Violation.owner))
-		.all()
-	)
-	return [ViolationOut.from_orm(v) for v in violations]
+# @app.get("/nfz-dev")  # A temporary endpoint without header requirement
+# def get_violations_dev(
+# 	db: Session = Depends(get_db)
+# ):
+# 	since = datetime.utcnow() - timedelta(hours=24)
+# 	violations = (
+# 		db.query(Violation)
+# 		.filter(Violation.timestamp >= since)
+# 		.options(joinedload(Violation.owner))
+# 		.all()
+# 	)
+# 	return [ViolationOut.from_orm(v) for v in violations]
