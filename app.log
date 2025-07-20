@@ -13,3 +13,4 @@
 2025-07-20 19:46:49,246 | INFO | airguardian | Returning first 10 drones
 2025-07-20 19:46:56,803 | INFO | airguardian | Returning first 100 drones
 2025-07-20 19:47:00,158 | WARNING | airguardian | Validation error: [{'type': 'less_than_equal', 'loc': ('query', 'limit'), 'msg': 'Input should be less than or equal to 100', 'input': '1000', 'ctx': {'le': 100}}] on http://localhost:8000/drones?limit=1000
+2025-07-20 19:49:02,038 | INFO | airguardian | App starting...
