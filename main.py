@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session, joinedload
 from datetime import datetime, timedelta
 from typing import List
 from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import httpx
@@ -24,6 +25,16 @@ X_SECRET = os.getenv("X_SECRET")
 DRONES_LIST_API = os.getenv("DRONES_LIST_API")
 
 app = FastAPI()
+
+#################################################
+#Allows frontend js to communicate with FASTAPI backend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # For development only
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.on_event("startup")
 def on_startup():
@@ -127,3 +138,16 @@ async def map_image(
 	buf.seek(0)
 
 	return StreamingResponse(buf, media_type="image/png")
+
+@app.get("/nfz-dev")  # A temporary endpoint without header requirement
+def get_violations_dev(
+    db: Session = Depends(get_db)
+):
+    since = datetime.utcnow() - timedelta(hours=24)
+    violations = (
+        db.query(Violation)
+        .filter(Violation.timestamp >= since)
+        .options(joinedload(Violation.owner))
+        .all()
+    )
+    return [ViolationOut.from_orm(v) for v in violations]
