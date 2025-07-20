@@ -29,17 +29,17 @@ def scan_for_violations():
 				y = drone["y"]
 				z = drone.get("z", 0)
 				drone_id = drone.get("id")
-				owner_id = str(drone.get("owner_id"))
-
+				owner_id = drone.get("owner_id")
 				if owner_id is None:
 					print(f"Skipping drone due to missing owner_id: {drone}")
 					continue
+				owner_id = str(owner_id)
 
 				if is_in_no_fly_zone(x, y):
 					print(f"Drone in restricted zone: x={x}, y={y}, z={z}, drone_id={drone_id}, owner_id={owner_id}")
 					violation = Violation(
 						drone_id=drone_id,
-						owner_id=str(owner_id),
+						owner_id=owner_id,
 						x=x,
 						y=y,
 						z=z,
