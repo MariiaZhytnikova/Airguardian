@@ -38,7 +38,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 #################################################
 
 @app.on_event("startup")
@@ -80,28 +79,9 @@ def get_violations(
 		.options(joinedload(Violation.owner))
 		.all()
 	)
-
 	return [ViolationOut.from_orm(v) for v in violations]
 
-
-# Use a proxy/backend to attach the secret
-@app.get("/frontend-nfz")
-def frontend_proxy_nfz(db: Session = Depends(get_db)):
-	# This does NOT expose the secret to the client
-	if X_SECRET is None:
-		raise HTTPException(status_code=500, detail="Missing secret key")
-
-	# Internally call the protected route
-	scan_for_violations.delay()
-	since = datetime.utcnow() - timedelta(hours=24)
-	violations = (
-		db.query(Violation)
-		.filter(Violation.timestamp >= since)
-		.options(joinedload(Violation.owner))
-		.all()
-	)
-	return [ViolationOut.from_orm(v) for v in violations]
-
+# # • GET /nfz: Returns violations from the last 24 hours
 @app.get("/map")
 async def map_image():
 
