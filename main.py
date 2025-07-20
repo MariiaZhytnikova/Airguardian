@@ -61,6 +61,7 @@ async def proxy_drones():
 
 	return drones
 
+# GET /nfz: Returns violations from the last 24 hours
 @app.get("/nfz")
 def get_violations(
 	x_secret: str = Header(...),
@@ -82,19 +83,7 @@ def get_violations(
 
 	return [ViolationOut.from_orm(v) for v in violations]
 
-@app.get("/nfz-dev")  # A temporary endpoint without header requirement
-def get_violations_dev(
-	db: Session = Depends(get_db)
-):
-	since = datetime.utcnow() - timedelta(hours=24)
-	violations = (
-		db.query(Violation)
-		.filter(Violation.timestamp >= since)
-		.options(joinedload(Violation.owner))
-		.all()
-	)
-	return [ViolationOut.from_orm(v) for v in violations]
-# # • GET /nfz: Returns violations from the last 24 hours
+
 # Use a proxy/backend to attach the secret
 @app.get("/frontend-nfz")
 def frontend_proxy_nfz(db: Session = Depends(get_db)):
