@@ -7,21 +7,31 @@ A secure and ef- ficient system will ensure real-time detection of unauthorized 
 existed docker
 
 	docker start drone-postgres
-
+	docker ps (to check running containers)
 app:
 
 	uvicorn main:app --reload 
 
+	run with poetry : poetry run uvicorn main:app --reload 
+
 web:
 
-	http://localhost:8000
+	http://localhost:8000/docs
+	http://127.0.0.1:8000/drones
+	http://127.0.0.1:8000/health
+	http://127.0.0.1:8000/nfz
+	http://127.0.0.1:8000/nfz-dev #temp
+
+Connect with fronend
+python3 -m http.server 8080 
+http://localhost:8080/
 
 
 ### Install dependencies
 
-    pip install fastapi uvicorn requests pydantic psycopg2-binary celery python-dotenv  
-    pip3 install uvicorn  
-    pip3 install sqlalchemy psycopg2-binary python-dotenv  
+	pip install fastapi uvicorn requests pydantic psycopg2-binary celery python-dotenv  
+	pip3 install uvicorn  
+	pip3 install sqlalchemy psycopg2-binary python-dotenv  
 
 ## 📦 STEP 1: FastAPI
 
@@ -29,23 +39,23 @@ web:
 
 In terminal, run:
 
-    python3 -m uvicorn main:app --reload
+	python3 -m uvicorn main:app --reload
 
 Go to:
-    http://localhost:8000/health
+	http://localhost:8000/health
 
 ## 🗃️ STEP 2: Setup Database (PostgreSQL)
 
-    Run PostgreSQL in Docker
+	Run PostgreSQL in Docker
 
 If Docker works, run this command to start PostgreSQL:
 
-    docker run --name drone-postgres \
-      -e POSTGRES_USER=drone_user \
-      -e POSTGRES_PASSWORD=mypassword \
-      -e POSTGRES_DB=drone_db \
-      -p 5432:5432 \
-      -d postgres
+	docker run --name drone-postgres \
+	  -e POSTGRES_USER=drone_user \
+	  -e POSTGRES_PASSWORD=mypassword \
+	  -e POSTGRES_DB=drone_db \
+	  -p 5432:5432 \
+	  -d postgres
 
 This will:
 
@@ -59,61 +69,61 @@ This will:
 
 Inside your project folder, add this:
 
-    DATABASE_URL=postgresql://drone_user:12345@localhost:5432/drone_db
+	DATABASE_URL=postgresql://drone_user:12345@localhost:5432/drone_db
 
 ✅ Test the connection
 
 Once the container is running, test the DB from Python:
 
-    Test py file: test_db.py
-    
-    from sqlalchemy import create_engine, text
-    from dotenv import load_dotenv
-    import os
-    
-    load_dotenv()
-    db_url = os.getenv("DATABASE_URL")
-    
-    engine = create_engine(db_url)
-    
-    with engine.connect() as conn:
-        result = conn.execute(text("SELECT 1;"))
-        print("✅ Connection successful. Result:", result.scalar())
+	Test py file: test_db.py
+	
+	from sqlalchemy import create_engine, text
+	from dotenv import load_dotenv
+	import os
+	
+	load_dotenv()
+	db_url = os.getenv("DATABASE_URL")
+	
+	engine = create_engine(db_url)
+	
+	with engine.connect() as conn:
+		result = conn.execute(text("SELECT 1;"))
+		print("✅ Connection successful. Result:", result.scalar())
 
 Run it:
 
-    python3 test_db.py
+	python3 test_db.py
 
 Expected output:
 
-    ✅ Connection successful. Result: 1
+	✅ Connection successful. Result: 1
 
 Create a database named drone_db.
 
-    from sqlalchemy import create_engine
-    from sqlalchemy.orm import sessionmaker, declarative_base
-    import os
-    
-    DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@localhost/drone_db")
-    
-    engine = create_engine(DATABASE_URL)
-    SessionLocal = sessionmaker(bind=engine)
-    
-    Base = declarative_base()
+	from sqlalchemy import create_engine
+	from sqlalchemy.orm import sessionmaker, declarative_base
+	import os
+	
+	DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@localhost/drone_db")
+	
+	engine = create_engine(DATABASE_URL)
+	SessionLocal = sessionmaker(bind=engine)
+	
+	Base = declarative_base()
 
 #### To stop PostgreSQL running in Docker, just use this command:
 
-    docker stop drone-postgres
+	docker stop drone-postgres
 
 This stops the container named drone-postgres (the one you created earlier).
 
 If you ever want to start it again, use:
 
-    docker start drone-postgres
+	docker start drone-postgres
 
 You can check its status with:
 
-    docker ps -a
+	docker ps -a
 
 
 
@@ -121,25 +131,25 @@ You can check its status with:
 
 You’ll define a Violation table and write a function that:
 
-    Fetches drones from https://drones-api.hive.fi/drones/
+	Fetches drones from https://drones-api.hive.fi/drones/
 
-    Checks if drone is in the no-fly zone (x² + y² <= 1000²)
+	Checks if drone is in the no-fly zone (x² + y² <= 1000²)
 
-    If yes → get owner data and save in database.
+	If yes → get owner data and save in database.
 
 ## 🔁 STEP 5: Background Task with Celery
 
-    Install Redis and run it (you can use Docker).
+	Install Redis and run it (you can use Docker).
 
-    Setup Celery to run a job every 10 seconds.
+	Setup Celery to run a job every 10 seconds.
 
-    Celery task will fetch drone data, detect violations, and store them.
+	Celery task will fetch drone data, detect violations, and store them.
 
 ## 🌐 STEP 6: More API Endpoints
 
-    /drones → Fetches and returns live drone data.
+	/drones → Fetches and returns live drone data.
 
-    /nfz → Returns violations in the past 24h. Requires secret in header.
+	/nfz → Returns violations in the past 24h. Requires secret in header.
 
 ## 🔒 STEP 7: .env File for Secret & DB URL
 
@@ -178,11 +188,11 @@ Tool: FastAPI
 
 FastAPI helps you:
 
-    Define routes like /health, /drones, /nfz
+	Define routes like /health, /drones, /nfz
 
-    Return structured JSON data
+	Return structured JSON data
 
-    Handle input and output easily
+	Handle input and output easily
 
 🧠 FastAPI = the skeleton of your web app.
 ✅ 2. Data Models & Validation
@@ -191,17 +201,17 @@ Tool: Pydantic (used by FastAPI)
 
 Pydantic helps you:
 
-    Define models for data, like:
+	Define models for data, like:
 
-    class Drone(BaseModel):
-        x: float
-        y: float
-        z: float
-        owner_id: str
+	class Drone(BaseModel):
+		x: float
+		y: float
+		z: float
+		owner_id: str
 
-    Validate incoming data is correct (types, required fields)
+	Validate incoming data is correct (types, required fields)
 
-    Structure response data (for consistency)
+	Structure response data (for consistency)
 
 🧠 Think of Pydantic as data security and cleanliness.
 ✅ 3. Periodic Data Fetching
@@ -210,9 +220,9 @@ Tool: Celery + requests
 
 You need to:
 
-    Fetch live drone data every 10 seconds
+	Fetch live drone data every 10 seconds
 
-    Do this in the background
+	Do this in the background
 
 Celery = background task runner
 requests = makes HTTP requests to external APIs
@@ -224,9 +234,9 @@ Tool: Celery + Redis
 
 Celery needs a message broker to run properly — usually Redis.
 
-    Redis is a lightweight in-memory server that queues tasks
+	Redis is a lightweight in-memory server that queues tasks
 
-    Celery connects to Redis and runs your function (like: "check drones for NFZ violation")
+	Celery connects to Redis and runs your function (like: "check drones for NFZ violation")
 
 🧠 Redis = "task queue brain", Celery = "worker doing the tasks"
 ✅ 5. Database
@@ -235,21 +245,21 @@ Tool: PostgreSQL (with SQLAlchemy)
 
 You’ll:
 
-    Save drone violations into a table
+	Save drone violations into a table
 
-    Each record will contain:
+	Each record will contain:
 
-        Position
+		Position
 
-        Time
+		Time
 
-        Owner info
+		Owner info
 
 Use:
 
-    psycopg2 to connect
+	psycopg2 to connect
 
-    SQLAlchemy to define models/tables
+	SQLAlchemy to define models/tables
 
 🧠 PostgreSQL stores your data. Without it, you’d lose violations every time the app restarts.
 ✅ 6. Logging & Error Handling
@@ -258,11 +268,11 @@ Tool: Python logging, FastAPI exception tools
 
 You’ll handle things like:
 
-    What if the drone API is down?
+	What if the drone API is down?
 
-    What if owner data is missing?
+	What if owner data is missing?
 
-    What if the request is bad?
+	What if the request is bad?
 
 Use logs to debug or monitor:
 
@@ -278,11 +288,11 @@ You don’t want /nfz (with private owner data) to be public.
 
 Solution:
 
-    Store a secret in .env
+	Store a secret in .env
 
-    Require a custom header X-Secret in the request
+	Require a custom header X-Secret in the request
 
-    Block if missing or incorrect
+	Block if missing or incorrect
 
 🧠 Like a password for access.
 🧠 TL;DR — WHO DOES WHAT?
@@ -294,3 +304,48 @@ Background tasking	Run tasks outside main server	Celery + Redis
 Database storage	Save violations permanently	PostgreSQL + SQLAlchemy
 Logging & errors	Handle problems and debugging	logging + FastAPI
 Secured access	Block unauthorized data views	Header + .env
+
+################################################################################
+## 🚀 Run Instructions
+
+### 🐘 1. Start PostgreSQL with Docker
+Start the existing PostgreSQL container (e.g., drone-postgres):
+
+```bash
+docker start drone-postgres
+```
+Verify that it's running:
+```bash
+docker ps
+```
+### 2. Run the Backend App
+Using uvicorn directly:
+```bash
+uvicorn main:app --reload
+```
+If you're using Poetry:
+```bash
+poetry run uvicorn main:app --reload
+```
+🔄 The --reload flag enables automatic code reload on changes (useful in development).
+
+### 3. API Endpoints
+Once the app is running, you can access the following endpoints:
+
+Swagger/OpenAPI Docs: http://localhost:8000/docs
+
+Health Check: http://127.0.0.1:8000/health
+
+Drones API: http://127.0.0.1:8000/drones
+
+No-Fly Zones API: http://127.0.0.1:8000/nfz
+
+Dev/Test NFZ Endpoint: http://127.0.0.1:8000/nfz-dev (temporary)
+
+### 4. Run the Frontend (Static)
+You can serve a static frontend using Python's built-in HTTP server:
+
+```bash
+python3 -m http.server 8080
+```
+Then open your browser to: http://localhost:8080/
