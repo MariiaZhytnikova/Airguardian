@@ -1,4 +1,6 @@
 from celery import Celery
+from app import tasks
+
 
 app = Celery('tasks', broker='redis://localhost:6379/0')
 
@@ -11,4 +13,4 @@ app.conf.beat_schedule = {
 
 app.conf.timezone = 'UTC'
 
-import tasks
+

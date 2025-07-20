@@ -1,12 +1,11 @@
 from sqlalchemy.orm import Session, sessionmaker, Session
 from fastapi import Depends, HTTPException
 from datetime import datetime
-from drone_db import SessionLocal  # Added this import
+from app.drone_db import SessionLocal
 
-from drone_db import SessionLocal
-from model import Owner, Violation
-from schemas import ViolationInput
-from fetcher import fetch_owner
+from app.model import Owner, Violation
+from app.schemas import ViolationInput
+from app.fetcher import fetch_owner
 
 # Function to check if a drone is in the no-fly zone
 def is_in_no_fly_zone(x: float, y: float) -> bool:

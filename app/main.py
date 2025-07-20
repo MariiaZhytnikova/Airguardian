@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 from typing import List
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.middleware.cors import CORSMiddleware
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -13,25 +12,24 @@ import matplotlib.patches as patches
 import httpx
 import os
 import io
+from fastapi.exceptions import RequestValidationError
+from fastapi import HTTPException
 
 
 
 ########### OWN ##########################
-from fetcher import fetch_drones, fetch_owner
-from drone_db import SessionLocal, engine
-from schemas import ViolationOut, ViolationInput, OwnerOut
-from model import Owner, Violation, Base
-from utils import get_db
-from tasks import scan_for_violations
-from logger import logger
-from error_handlers import (
+from app.fetcher import fetch_drones, fetch_owner
+from app.drone_db import SessionLocal, engine
+from app.schemas import ViolationOut, ViolationInput, OwnerOut
+from app.model import Owner, Violation, Base
+from app.utils import get_db
+from app.tasks import scan_for_violations
+from app.logger import logger
+from app.error_handlers import (
     validation_exception_handler,
     http_exception_handler,
     unhandled_exception_handler
 )
-from fastapi.exceptions import RequestValidationError
-from fastapi import HTTPException
-
 ####################################
 
 load_dotenv()

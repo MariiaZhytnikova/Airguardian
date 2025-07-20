@@ -123,8 +123,11 @@ If you're using Poetry:
 ```bash
 	poetry run uvicorn main:app --reload
 ```
-
 🔄 The --reload flag enables automatic code reload on changes (useful in development).
+Show the Process Using Port 8000 (in case you need to kill them)
+```bash
+lsof -i :8000
+```
 
 ### ⚙️ 2. Start Celery service for 
 
