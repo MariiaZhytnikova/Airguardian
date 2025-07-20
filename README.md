@@ -116,12 +116,12 @@ To stop PostgreSQL running in Docker, use command:
 ### 2. Run the Backend App
 Using uvicorn directly:
 ```bash
-	uvicorn main:app --reload
+	uvicorn app.main:app --reload
 ```
 
 If you're using Poetry:
 ```bash
-	poetry run uvicorn main:app --reload
+	poetry run uvicorn app.main:app --reload
 ```
 🔄 The --reload flag enables automatic code reload on changes (useful in development).
 Show the Process Using Port 8000 (in case you need to kill them)
@@ -136,6 +136,10 @@ Celery is used to run background tasks, such as periodically checking for drone 
 Using Celery directly:
 ```bash
 	celery -A celery_app worker --beat --loglevel=info
+```
+Using Celery with poetry
+```bash
+	poetry run celery -A app.tasks worker --loglevel=info   !!!!!!!!!ASK MARIA!!!!!!!!!
 ```
 
 If you're using Poetry:
@@ -171,6 +175,7 @@ Real-time map:
 You can serve a static frontend using Python's built-in HTTP server:
 
 ```bash
+cd static
 python3 -m http.server 8080
 ```
 Then open your browser to: http://localhost:8080/

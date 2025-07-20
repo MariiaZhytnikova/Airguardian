@@ -1,42 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drone Violations Monitor</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        .violation-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .violation-card h3 {
-            margin-top: 0;
-            color: #e74c3c;
-        }
-        .error {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Drone Violations Monitor</title>
+	
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			max-width: 1000px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+		h1 {
+			color: #333;
+			text-align: center;
+		}
+		.violation-card {
+			border: 1px solid #ddd;
+			border-radius: 8px;
+			padding: 15px;
+			margin-bottom: 15px;
+			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		}
+		.violation-card h3 {
+			margin-top: 0;
+			color: #e74c3c;
+		}
+		.error {
+			color: red;
+			font-weight: bold;
+		}
+		button {
+			background-color: rgb(129, 227, 129);
+			border-radius: 8px;
+			margin-bottom: 50px;
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
-    <h1>Drone No-Fly Zone Violations</h1>
-    <div id="violations-container">
-        <p>Loading violations data...</p>
-    </div>
+	<h1>Drone No-Fly Zone Violations</h1>
+	<div style="text-align: center; margin-top: 50px;">
+  		<button onclick="window.location.href='map.html'" style="padding: 12px 24px; font-size: 16px;">
+			View Live Map
+  		</button>
+	</div>	
+	
+	<div id="violations-container">
+		<p>Loading violations data...</p>
+	</div>
 
-    <script src="front.js"></script>
+	<script src="front.js"></script>
 </body>
 </html>
