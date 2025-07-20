@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from typing import List
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import httpx
@@ -35,6 +36,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+#################################################
 
 @app.on_event("startup")
 def on_startup():
@@ -77,6 +80,18 @@ def get_violations(
 
 	return [ViolationOut.from_orm(v) for v in violations]
 
+@app.get("/nfz-dev")  # A temporary endpoint without header requirement
+def get_violations_dev(
+    db: Session = Depends(get_db)
+):
+    since = datetime.utcnow() - timedelta(hours=24)
+    violations = (
+        db.query(Violation)
+        .filter(Violation.timestamp >= since)
+        .options(joinedload(Violation.owner))
+        .all()
+    )
+    return [ViolationOut.from_orm(v) for v in violations]
 # # • GET /nfz: Returns violations from the last 24 hours
 @app.get("/map")
 async def map_image(
