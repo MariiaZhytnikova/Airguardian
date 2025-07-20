@@ -23,6 +23,17 @@ from utils import get_db
 from tasks import scan_for_violations
 ####################################
 
+from fastapi.exceptions import RequestValidationError
+from starlette.middleware.cors import CORSMiddleware
+from error_handlers import (
+    validation_exception_handler,
+    http_exception_handler,
+    unhandled_exception_handler
+)
+from logger import logger  # You can now use logger.info(), logger.error(), etc.
+#from fastapi import HTTPException
+###############################################
+
 load_dotenv()
 X_SECRET = os.getenv("X_SECRET")
 DRONES_LIST_API = os.getenv("DRONES_LIST_API")
@@ -39,7 +50,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 #################################################
-
+# Register custom error handlers
+app.add_exception_handler(RequestValidationError, validation_exception_handler)
+app.add_exception_handler(HTTPException, http_exception_handler)
+app.add_exception_handler(Exception, unhandled_exception_handler)
+#####################################################
+# Example route to test logger
+@app.get("/test")
+def test():
+    logger.info("Test endpoint called")
+    return {"message": "Hello from Airguardian"}
+#######################################################
 @app.on_event("startup")
 def on_startup():
 	Base.metadata.create_all(bind=engine)
