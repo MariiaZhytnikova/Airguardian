@@ -9,7 +9,6 @@ from schemas import ViolationInput
 from fetcher import fetch_owner
 
 # Function to check if a drone is in the no-fly zone
-
 def is_in_no_fly_zone(x: float, y: float) -> bool:
 	return x ** 2 + y ** 2 <= 1000 ** 2
 
@@ -23,7 +22,7 @@ def get_db():
 #def report_violation(data: ViolationInput, db: Session = Depends(get_db)):
 def report_violation(data, db: Session):
 	# 1. Try to find the owner in the database
-	owner = db.query(Owner).filter(Owner.id == data.owner_id).first()
+	owner = db.query(Owner).filter(Owner.id == str(data.owner_id)).first()
 
 	# 2. If not found, fetch from external API
 	if not owner:
@@ -46,6 +45,7 @@ def report_violation(data, db: Session):
 
 	# 4. Create and save the violation
 	violation = Violation(
+		drone_id=data.drone_id,
 		owner_id=data.owner_id,
 		x=data.x,
 		y=data.y,

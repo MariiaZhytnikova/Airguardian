@@ -28,25 +28,21 @@ def scan_for_violations():
 				x = drone["x"]
 				y = drone["y"]
 				z = drone.get("z", 0)
+				drone_id = drone.get("id")
 				owner_id = drone.get("owner_id")
-
 				if owner_id is None:
 					print(f"Skipping drone due to missing owner_id: {drone}")
 					continue
-
-				owner = db.query(Owner).filter(Owner.id == owner_id).first()
-				if not owner:
-					print(f"Owner not found in DB for owner_id {owner_id}")
-					continue
+				owner_id = str(owner_id)
 
 				if is_in_no_fly_zone(x, y):
-					print(f"Drone in restricted zone: x={x}, y={y}, z={z}, owner_id={owner_id}")
-
+					print(f"Drone in restricted zone: x={x}, y={y}, z={z}, drone_id={drone_id}, owner_id={owner_id}")
 					violation = Violation(
+						drone_id=drone_id,
+						owner_id=owner_id,
 						x=x,
 						y=y,
 						z=z,
-						owner_id=owner_id,
 						timestamp=datetime.utcnow()
 					)
 					report_violation(violation, db)

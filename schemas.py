@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from datetime import datetime
 
 class ViolationInput(BaseModel):
+	drone_id: str
 	owner_id: str
 	x: float
 	y: float
@@ -20,7 +21,7 @@ class OwnerOut(BaseModel):
 		from_attributes = True
 
 class ViolationOut(BaseModel):
-	owner_id: str
+	drone_id: str
 	timestamp: datetime
 	x: float
 	y: float
@@ -29,4 +30,3 @@ class ViolationOut(BaseModel):
 
 	class Config:
 		from_attributes = True
-
