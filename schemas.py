@@ -8,7 +8,7 @@ class ViolationInput(BaseModel):
 	z: float
 
 	class Config:
-		orm_mode = True
+		from_attributes = True
 
 class OwnerOut(BaseModel):
 	first_name: str
@@ -17,7 +17,6 @@ class OwnerOut(BaseModel):
 	phone_number: str
 
 	class Config:
-		orm_mode = True
 		from_attributes = True
 
 class ViolationOut(BaseModel):
@@ -29,6 +28,5 @@ class ViolationOut(BaseModel):
 	owner: OwnerOut
 
 	class Config:
-		orm_mode = True
 		from_attributes = True
 

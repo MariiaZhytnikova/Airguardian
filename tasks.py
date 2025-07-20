@@ -3,7 +3,7 @@ from celery_app import app
 import httpx
 from datetime import datetime
 from sqlalchemy.orm import Session
-from drone_db import SessionLocal, Base, engine
+from drone_db import SessionLocal
 
 from model import Violation, Owner
 from schemas import OwnerOut
