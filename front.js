@@ -3,7 +3,7 @@ async function fetchViolations() {
     container.innerHTML = '<p>Loading violations data...</p>';
   
     try {
-        const response = await fetch('http://localhost:8000/nfz-dev');
+        const response = await fetch('http://localhost:8000/frontend-nfz');
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }

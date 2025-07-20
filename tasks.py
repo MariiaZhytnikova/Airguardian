@@ -3,17 +3,20 @@ from celery_app import app
 import httpx
 from datetime import datetime
 from sqlalchemy.orm import Session
-from drone_db import SessionLocal
+from dotenv import load_dotenv
+import os
 
+from drone_db import SessionLocal, Base, engine
 from model import Violation, Owner
 from schemas import OwnerOut
 from utils import is_in_no_fly_zone, report_violation
-from dotenv import load_dotenv
-import os
 
 load_dotenv()
 
 DRONES_LIST_API = os.getenv("DRONES_LIST_API")
+
+# Ensure tables exist when worker starts
+Base.metadata.create_all(bind=engine)
 
 @app.task(name='scan_for_violations')
 def scan_for_violations():
