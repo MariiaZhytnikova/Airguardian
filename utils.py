@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session, sessionmaker, Session
 from fastapi import Depends, HTTPException
 from datetime import datetime
 
+from drone_db import SessionLocal
 from model import Owner, Violation
 from schemas import ViolationInput
 from fetcher import fetch_owner
