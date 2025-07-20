@@ -1,2 +1,47 @@
+# Python cache and bytecode
 __pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Bytecode in any subfolder (like app/__pycache__)
+**/__pycache__/
+**/*.py[cod]
+
+# Celery beat schedule file
 celerybeat-schedule
+
+# Log files
+*.log
+
+# Environment variables
+.env
+
+# Poetry files (just lock file can be committed if needed)
+poetry.lock
+
+# VSCode settings (optional)
+.vscode/
+
+# macOS system files
+.DS_Store
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Coverage/report files
+htmlcov/
+.coverage
+.cache
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+
+# Testing and profiling
+*.prof
+*.bench
+*.pid
