@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session, sessionmaker, Session
 from fastapi import Depends, HTTPException
 from datetime import datetime
+from drone_db import SessionLocal  # Added this import
 
 from model import Owner, Violation
 from schemas import ViolationInput
@@ -18,7 +19,8 @@ def get_db():
 	finally:
 		db.close()
 
-def report_violation(data: ViolationInput, db: Session = Depends(get_db)):
+#def report_violation(data: ViolationInput, db: Session = Depends(get_db)):
+def report_violation(data, db: Session):
 	# 1. Try to find the owner in the database
 	owner = db.query(Owner).filter(Owner.id == data.owner_id).first()
 
