@@ -1,0 +1,1369 @@
+	
+Response body
+Download
+[
+  {
+    "owner_id": "f6432ee3-148b-4029-aa44-ae5cdd649328",
+    "timestamp": "2025-07-19T12:21:42.666038",
+    "x": 4321,
+    "y": 2750,
+    "z": 190,
+    "owner": {
+      "first_name": "Matti",
+      "last_name": "Meikäläinen",
+      "social_security_number": "290919-466W",
+      "phone_number": "+358401234567"
+    }
+  },
+  {
+    "owner_id": "f6432ee3-148b-4029-aa44-ae5cdd649328",
+    "timestamp": "2025-07-19T12:24:02.039995",
+    "x": 7785,
+    "y": -3273,
+    "z": 96,
+    "owner": {
+      "first_name": "Matti",
+      "last_name": "Meikäläinen",
+      "social_security_number": "290919-466W",
+      "phone_number": "+358401234567"
+    }
+  },
+  {
+    "owner_id": "f6432ee3-148b-4029-aa44-ae5cdd649328",
+    "timestamp": "2025-07-19T12:29:58.858451",
+    "x": -2618,
+    "y": -6717,
+    "z": 235,
+    "owner": {
+      "first_name": "Matti",
+      "last_name": "Meikäläinen",
+      "social_security_number": "290919-466W",
+      "phone_number": "+358401234567"
+    }
+  },
+  {
+    "owner_id": "f6432ee3-148b-4029-aa44-ae5cdd649328",
+    "timestamp": "2025-07-19T12:30:21.201325",
+    "x": -2076,
+    "y": -5703,
+    "z": 234,
+    "owner": {
+      "first_name": "Matti",
+      "last_name": "Meikäläinen",
+      "social_security_number": "290919-466W",
+      "phone_number": "+358401234567"
+    }
+  },
+  {
+    "owner_id": "f6432ee3-148b-4029-aa44-ae5cdd649328",
+    "timestamp": "2025-07-19T12:30:51.397489",
+    "x": -1368,
+    "y": -4380,
+    "z": 233,
+    "owner": {
+      "first_name": "Matti",
+      "last_name": "Meikäläinen",
+      "social_security_number": "290919-466W",
+      "phone_number": "+358401234567"
+    }
+  },
+  {
+    "owner_id": "c2c4e0e8-822c-4661-a606-0f66a8eefe35",
+    "timestamp": "2025-07-19T12:30:51.456189",
+    "x": -584,
+    "y": 669,
+    "z": 178,
+    "owner": {
+      "first_name": "Liisa",
+      "last_name": "Virtanen",
+      "social_security_number": "151219-499B",
+      "phone_number": "+358405678901"
+    }
+  },
+  {
+    "owner_id": "eb95d17e-b19d-4c87-876c-b5ffa95755c4",
+    "timestamp": "2025-07-19T12:30:51.481194",
+    "x": -5539,
+    "y": -294,
+    "z": 102,
+    "owner": {
+      "first_name": "Juha",
+      "last_name": "Korhonen",
+      "social_security_number": "100119-3437",
+      "phone_number": "+358409876543"
+    }
+  },
+  {
+    "owner_id": "183bdf64-5c9d-44c2-baf4-d2f8e187d8a6",
+    "timestamp": "2025-07-19T12:30:51.506193",
+    "x": 3158,
+    "y": 8506,
+    "z": 212,
+    "owner": {
+      "first_name": "Anna",
+      "last_name": "Mäkinen",
+      "social_security_number": "150220A217E",
+      "phone_number": "+358403456789"
+    }
+  },
+  {
+    "owner_id": "7c377ac6-701d-4302-9622-5ac8e51bb899",
+    "timestamp": "2025-07-19T12:30:51.531063",
+    "x": -2334,
+    "y": -5163,
+    "z": 140,
+    "owner": {
+      "first_name": "Pekka",
+      "last_name": "Nieminen",
+      "social_security_number": "060219-3301",
+      "phone_number": "+358407890123"
+    }
+  },
+  {
+    "owner_id": "fdd8ade3-0f76-41d8-87a9-2d0ca7abc281",
+    "timestamp": "2025-07-19T12:30:51.556215",
+    "x": 2491,
+    "y": 3108,
+    "z": 251,
+    "owner": {
+      "first_name": "Kaisa",
+      "last_name": "Järvinen",
+      "social_security_number": "220819-6727",
+      "phone_number": "+358404567890"
+    }
+  },
+  {
+    "owner_id": "eed4e727-9479-4771-95b6-7179e85c37b1",
+    "timestamp": "2025-07-19T12:30:51.581215",
+    "x": 4500,
+    "y": 194,
+    "z": 149,
+    "owner": {
+      "first_name": "Timo",
+      "last_name": "Koskinen",
+      "social_security_number": "060719-0833",
+      "phone_number": "+358408901234"
+    }
+  },
+  {
+    "owner_id": "75a7e0a8-6eb2-410d-bee7-72187be9ad6c",
+    "timestamp": "2025-07-19T12:30:51.606165",
+    "x": 7722,
+    "y": -4475,
+    "z": 200,
+    "owner": {
+      "first_name": "Laura",
+      "last_name": "Saarinen",
+      "social_security_number": "170319-548Y",
+      "phone_number": "+358402123456"
+    }
+  },
+  {
+    "owner_id": "c5e20c69-12da-444e-beee-fae445ba95a7",
+    "timestamp": "2025-07-19T12:30:51.631176",
+    "x": 2102,
+    "y": -7917,
+    "z": 58,
+    "owner": {
+      "first_name": "Ville",
+      "last_name": "Lehtonen",
+      "social_security_number": "091019-5727",
+      "phone_number": "+358405678901"
+    }
+  },
+  {
+    "owner_id": "8bf43c51-e301-4520-98e4-eb70ed7b46f7",
+    "timestamp": "2025-07-19T12:30:51.656267",
+    "x": 5298,
+    "y": 3639,
+    "z": 95,
+    "owner": {
+      "first_name": "Sofia",
+      "last_name": "Rantanen",
+      "social_security_number": "051020A1498",
+      "phone_number": "+358409012345"
+    }
+  },
+  {
+    "owner_id": "c82350eb-3163-4dd0-86f4-87c9bd634b01",
+    "timestamp": "2025-07-19T12:30:51.681415",
+    "x": 7978,
+    "y": 85,
+    "z": 100,
+    "owner": {
+      "first_name": "Eero",
+      "last_name": "Hämäläinen",
+      "social_security_number": "151219-840B",
+      "phone_number": "+358403456789"
+    }
+  },
+  {
+    "owner_id": "4beecc75-1d15-49c3-a011-35b9af9ec876",
+    "timestamp": "2025-07-19T12:30:51.706187",
+    "x": -1750,
+    "y": -8679,
+    "z": 99,
+    "owner": {
+      "first_name": "Maria",
+      "last_name": "Koivisto",
+      "social_security_number": "050419-3322",
+      "phone_number": "+358407890123"
+    }
+  },
+  {
+    "owner_id": "ed403ebd-4378-4420-883c-65db77a1affa",
+    "timestamp": "2025-07-19T12:30:51.731450",
+    "x": -4894,
+    "y": 1669,
+    "z": 109,
+    "owner": {
+      "first_name": "Antti",
+      "last_name": "Lahtinen",
+      "social_security_number": "301219-806X",
+      "phone_number": "+358401234567"
+    }
+  },
+  {
+    "owner_id": "be89d819-d1fd-4d27-96c1-df2ebd9f957c",
+    "timestamp": "2025-07-19T12:30:51.756465",
+    "x": -49,
+    "y": -4509,
+    "z": 214,
+    "owner": {
+      "first_name": "Helena",
+      "last_name": "Salonen",
+      "social_security_number": "100220A609V",
+      "phone_number": "+358405678901"
+    }
+  },
+  {
+    "owner_id": "628768d4-972a-4a0b-ab81-1293f69d5087",
+    "timestamp": "2025-07-19T12:30:51.781456",
+    "x": -2334,
+    "y": 4950,
+    "z": 241,
+    "owner": {
+      "first_name": "Jukka",
+      "last_name": "Turunen",
+      "social_security_number": "060919-231F",
+      "phone_number": "+358409012345"
+    }
+  },
+  {
+    "owner_id": "3cdff61f-9560-4bb7-8286-9ef30e18bacd",
+    "timestamp": "2025-07-19T12:30:51.806313",
+    "x": -1753,
+    "y": 1771,
+    "z": 239,
+    "owner": {
+      "first_name": "Riikka",
+      "last_name": "Karjalainen",
+      "social_security_number": "120219-722J",
+      "phone_number": "+358402345678"
+    }
+  },
+  {
+    "owner_id": "2e6ef69e-8e43-403c-8810-ac6debf34b8d",
+    "timestamp": "2025-07-19T12:30:51.831489",
+    "x": -9120,
+    "y": 199,
+    "z": 193,
+    "owner": {
+      "first_name": "Markku",
+      "last_name": "Hiltunen",
+      "social_security_number": "210619-0574",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "dd6612a8-9ef1-4264-8e80-3320c7d7c81c",
+    "timestamp": "2025-07-19T12:30:51.856496",
+    "x": -2490,
+    "y": -3737,
+    "z": 185,
+    "owner": {
+      "first_name": "Johanna",
+      "last_name": "Pitkänen",
+      "social_security_number": "190919-133P",
+      "phone_number": "+358400123456"
+    }
+  },
+  {
+    "owner_id": "3569125a-0a41-4ea8-9459-cc3bad40ab84",
+    "timestamp": "2025-07-19T12:30:51.881482",
+    "x": 3495,
+    "y": 7795,
+    "z": 189,
+    "owner": {
+      "first_name": "Petri",
+      "last_name": "Aaltonen",
+      "social_security_number": "010819-490T",
+      "phone_number": "+358404567890"
+    }
+  },
+  {
+    "owner_id": "1749d567-8c2a-4b44-92b0-9e73f753eaac",
+    "timestamp": "2025-07-19T12:30:51.906372",
+    "x": 1230,
+    "y": 1972,
+    "z": 143,
+    "owner": {
+      "first_name": "Nina",
+      "last_name": "Ojala",
+      "social_security_number": "130919-585D",
+      "phone_number": "+358408901234"
+    }
+  },
+  {
+    "owner_id": "834b8f26-f78e-4459-b526-e6dfbd7b3d63",
+    "timestamp": "2025-07-19T12:30:51.931481",
+    "x": -7263,
+    "y": 3699,
+    "z": 165,
+    "owner": {
+      "first_name": "Teemu",
+      "last_name": "Koskela",
+      "social_security_number": "200819-3651",
+      "phone_number": "+358401234567"
+    }
+  },
+  {
+    "owner_id": "a20ea56f-8f38-4d6d-8cc0-a287fa93b5fb",
+    "timestamp": "2025-07-19T12:30:51.956213",
+    "x": -6765,
+    "y": 1630,
+    "z": 81,
+    "owner": {
+      "first_name": "Paula",
+      "last_name": "Leppänen",
+      "social_security_number": "270719-696D",
+      "phone_number": "+358405678901"
+    }
+  },
+  {
+    "owner_id": "e863fa6c-a58e-4995-8302-4211fd7578e8",
+    "timestamp": "2025-07-19T12:30:51.981481",
+    "x": -3872,
+    "y": 395,
+    "z": 166,
+    "owner": {
+      "first_name": "Kimmo",
+      "last_name": "Jokinen",
+      "social_security_number": "091019-342T",
+      "phone_number": "+358409012345"
+    }
+  },
+  {
+    "owner_id": "420a30be-940c-437a-b236-99f6bdeb2491",
+    "timestamp": "2025-07-19T12:30:52.006500",
+    "x": 6791,
+    "y": 2069,
+    "z": 86,
+    "owner": {
+      "first_name": "Hanna",
+      "last_name": "Mattila",
+      "social_security_number": "190719-606B",
+      "phone_number": "+358402345678"
+    }
+  },
+  {
+    "owner_id": "271727af-d776-47b1-a8b5-811af8835da9",
+    "timestamp": "2025-07-19T12:30:52.031376",
+    "x": -3700,
+    "y": 3936,
+    "z": 107,
+    "owner": {
+      "first_name": "Jarmo",
+      "last_name": "Nurmi",
+      "social_security_number": "271219-025T",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "769cc189-f2f8-49d4-8c00-63a18c54bcc4",
+    "timestamp": "2025-07-19T12:30:52.064612",
+    "x": 636,
+    "y": 3428,
+    "z": 96,
+    "owner": {
+      "first_name": "Tiina",
+      "last_name": "Heikkilä",
+      "social_security_number": "211219-728L",
+      "phone_number": "+358400123456"
+    }
+  },
+  {
+    "owner_id": "ce97e55b-7acb-4808-b4fb-2dee622c5058",
+    "timestamp": "2025-07-19T12:30:52.089626",
+    "x": -3890,
+    "y": 4434,
+    "z": 106,
+    "owner": {
+      "first_name": "Risto",
+      "last_name": "Mäkelä",
+      "social_security_number": "180619-545X",
+      "phone_number": "+358404567890"
+    }
+  },
+  {
+    "owner_id": "97362334-fe41-49f2-8d75-eaf0a972a5e2",
+    "timestamp": "2025-07-19T12:30:52.114868",
+    "x": 4439,
+    "y": 4882,
+    "z": 268,
+    "owner": {
+      "first_name": "Sirpa",
+      "last_name": "Peltonen",
+      "social_security_number": "010719-822P",
+      "phone_number": "+358408901234"
+    }
+  },
+  {
+    "owner_id": "25a7c720-fe26-441d-89ca-c798fbf4bce6",
+    "timestamp": "2025-07-19T12:30:52.140109",
+    "x": 3292,
+    "y": -9196,
+    "z": 279,
+    "owner": {
+      "first_name": "Raimo",
+      "last_name": "Hakala",
+      "social_security_number": "240719-382B",
+      "phone_number": "+358402123456"
+    }
+  },
+  {
+    "owner_id": "173fed07-fc61-409d-8726-0dbab98266a5",
+    "timestamp": "2025-07-19T12:30:52.164774",
+    "x": 6405,
+    "y": 4343,
+    "z": 199,
+    "owner": {
+      "first_name": "Leena",
+      "last_name": "Kallio",
+      "social_security_number": "020219-211L",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "3d2c9b80-06c8-46f6-9ad5-77d36147aa8b",
+    "timestamp": "2025-07-19T12:30:52.198229",
+    "x": 4691,
+    "y": -6282,
+    "z": 267,
+    "owner": {
+      "first_name": "Seppo",
+      "last_name": "Laitinen",
+      "social_security_number": "090719-7950",
+      "phone_number": "+358401234567"
+    }
+  },
+  {
+    "owner_id": "5aa54d34-4bac-48c2-9385-40d388a070cb",
+    "timestamp": "2025-07-19T12:30:52.222999",
+    "x": -2336,
+    "y": 6755,
+    "z": 206,
+    "owner": {
+      "first_name": "Merja",
+      "last_name": "Niemi",
+      "social_security_number": "141019-303S",
+      "phone_number": "+358405678901"
+    }
+  },
+  {
+    "owner_id": "b246d0ad-c967-4bbb-a2fe-bcfeb2d0be65",
+    "timestamp": "2025-07-19T12:30:52.248030",
+    "x": -8111,
+    "y": 4520,
+    "z": 172,
+    "owner": {
+      "first_name": "Ari",
+      "last_name": "Suominen",
+      "social_security_number": "020819-101W",
+      "phone_number": "+358409012345"
+    }
+  },
+  {
+    "owner_id": "f912456c-9386-4e16-9772-0561e06352d7",
+    "timestamp": "2025-07-19T12:30:52.273296",
+    "x": 701,
+    "y": -2618,
+    "z": 155,
+    "owner": {
+      "first_name": "Päivi",
+      "last_name": "Välimäki",
+      "social_security_number": "090719-731X",
+      "phone_number": "+358402345678"
+    }
+  },
+  {
+    "owner_id": "651eb8a5-3c40-4046-9e84-e8a2b5c921b4",
+    "timestamp": "2025-07-19T12:30:52.298186",
+    "x": -1015,
+    "y": 4248,
+    "z": 259,
+    "owner": {
+      "first_name": "Kari",
+      "last_name": "Salminen",
+      "social_security_number": "080619-6562",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "e5e97e74-ccb4-42fe-ac4c-fc344a154731",
+    "timestamp": "2025-07-19T12:30:52.323190",
+    "x": 1878,
+    "y": -3246,
+    "z": 134,
+    "owner": {
+      "first_name": "Tuula",
+      "last_name": "Lindholm",
+      "social_security_number": "030619-462K",
+      "phone_number": "+358400123456"
+    }
+  },
+  {
+    "owner_id": "cdf283da-61a1-47c9-8868-128cdb57c18f",
+    "timestamp": "2025-07-19T12:30:52.348129",
+    "x": -770,
+    "y": -5610,
+    "z": 167,
+    "owner": {
+      "first_name": "Heikki",
+      "last_name": "Toivonen",
+      "social_security_number": "240919-4538",
+      "phone_number": "+358404567890"
+    }
+  },
+  {
+    "owner_id": "dc27a2c6-4db3-444b-8313-2906c30cdff1",
+    "timestamp": "2025-07-19T12:30:52.439881",
+    "x": -2804,
+    "y": 2459,
+    "z": 119,
+    "owner": {
+      "first_name": "Ritva",
+      "last_name": "Kettunen",
+      "social_security_number": "140719-368E",
+      "phone_number": "+358408901234"
+    }
+  },
+  {
+    "owner_id": "38402a00-b562-43d0-9f0d-bedf9916cb76",
+    "timestamp": "2025-07-19T12:30:52.464879",
+    "x": 808,
+    "y": -701,
+    "z": 204,
+    "owner": {
+      "first_name": "Tapio",
+      "last_name": "Manninen",
+      "social_security_number": "170219-260V",
+      "phone_number": "+358402123456"
+    }
+  },
+  {
+    "owner_id": "17e96da7-b472-482c-926f-184627a3f8eb",
+    "timestamp": "2025-07-19T12:30:52.506440",
+    "x": 2901,
+    "y": -2084,
+    "z": 176,
+    "owner": {
+      "first_name": "Aino",
+      "last_name": "Kemppainen",
+      "social_security_number": "011119-2970",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "1c1c381c-620f-4540-9ba0-e2fd1635f403",
+    "timestamp": "2025-07-19T12:30:52.531632",
+    "x": 1653,
+    "y": 6043,
+    "z": 179,
+    "owner": {
+      "first_name": "Olli",
+      "last_name": "Miettinen",
+      "social_security_number": "150519-8822",
+      "phone_number": "+358401234567"
+    }
+  },
+  {
+    "owner_id": "4735b11f-7cdb-4a0a-a2b0-ca2ab257b606",
+    "timestamp": "2025-07-19T12:30:52.556485",
+    "x": -586,
+    "y": 1939,
+    "z": 133,
+    "owner": {
+      "first_name": "Ulla",
+      "last_name": "Ruotsalainen",
+      "social_security_number": "190719-0071",
+      "phone_number": "+358405678901"
+    }
+  },
+  {
+    "owner_id": "0bd3076a-cf8d-42ea-8844-b139bc48ddcb",
+    "timestamp": "2025-07-19T12:30:52.581626",
+    "x": 549,
+    "y": -1733,
+    "z": 140,
+    "owner": {
+      "first_name": "Martti",
+      "last_name": "Harju",
+      "social_security_number": "110420A4289",
+      "phone_number": "+358409012345"
+    }
+  },
+  {
+    "owner_id": "3ffedf60-c07c-4b43-9c2b-2a317b52baf9",
+    "timestamp": "2025-07-19T12:30:52.606547",
+    "x": -1515,
+    "y": -738,
+    "z": 103,
+    "owner": {
+      "first_name": "Pirjo",
+      "last_name": "Lahti",
+      "social_security_number": "081219-4420",
+      "phone_number": "+358402345678"
+    }
+  },
+  {
+    "owner_id": "628d59a8-5299-4d6b-a782-acc8fdde7988",
+    "timestamp": "2025-07-19T12:30:52.631607",
+    "x": -7436,
+    "y": -254,
+    "z": 86,
+    "owner": {
+      "first_name": "Jouni",
+      "last_name": "Saari",
+      "social_security_number": "130920A823B",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "1710e92b-0e85-4a71-83e6-46073b63a5bf",
+    "timestamp": "2025-07-19T12:30:52.673197",
+    "x": 7628,
+    "y": -3394,
+    "z": 176,
+    "owner": {
+      "first_name": "Maija",
+      "last_name": "Kuusisto",
+      "social_security_number": "090519-579D",
+      "phone_number": "+358400123456"
+    }
+  },
+  {
+    "owner_id": "21ce2cc2-335a-4a34-9b16-c1c6a645c2fb",
+    "timestamp": "2025-07-19T12:30:52.698323",
+    "x": -2097,
+    "y": -2168,
+    "z": 87,
+    "owner": {
+      "first_name": "Veikko",
+      "last_name": "Aho",
+      "social_security_number": "150819-7806",
+      "phone_number": "+358404567890"
+    }
+  },
+  {
+    "owner_id": "a54266eb-28d1-4250-85a8-418f2165275e",
+    "timestamp": "2025-07-19T12:30:52.723206",
+    "x": -3670,
+    "y": -4278,
+    "z": 226,
+    "owner": {
+      "first_name": "Seija",
+      "last_name": "Mikkola",
+      "social_security_number": "050119-397R",
+      "phone_number": "+358408901234"
+    }
+  },
+  {
+    "owner_id": "22856121-a076-4162-a8b3-35dce9d6755f",
+    "timestamp": "2025-07-19T12:30:52.748329",
+    "x": 3029,
+    "y": 5919,
+    "z": 120,
+    "owner": {
+      "first_name": "Hannu",
+      "last_name": "Rinne",
+      "social_security_number": "170619-653S",
+      "phone_number": "+358402123456"
+    }
+  },
+  {
+    "owner_id": "30336936-43f8-4f93-87be-88f096f1a9bb",
+    "timestamp": "2025-07-19T12:30:52.773339",
+    "x": -4523,
+    "y": -6069,
+    "z": 151,
+    "owner": {
+      "first_name": "Raija",
+      "last_name": "Anttila",
+      "social_security_number": "280220A2928",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "f3c068c4-e508-487d-8e43-7b8b1a858a99",
+    "timestamp": "2025-07-19T12:30:52.798203",
+    "x": -7356,
+    "y": -5752,
+    "z": 196,
+    "owner": {
+      "first_name": "Erkki",
+      "last_name": "Kinnunen",
+      "social_security_number": "030219-1808",
+      "phone_number": "+358401234567"
+    }
+  },
+  {
+    "owner_id": "795b88c8-d63d-46ad-8af2-00df4976dd7f",
+    "timestamp": "2025-07-19T12:30:52.823341",
+    "x": -1070,
+    "y": 1087,
+    "z": 204,
+    "owner": {
+      "first_name": "Liisa",
+      "last_name": "Seppänen",
+      "social_security_number": "090919-616U",
+      "phone_number": "+358405678901"
+    }
+  },
+  {
+    "owner_id": "2309ce32-4b4e-4b22-8db7-ddc56a4f5cdc",
+    "timestamp": "2025-07-19T12:30:52.848475",
+    "x": 4068,
+    "y": -7739,
+    "z": 144,
+    "owner": {
+      "first_name": "Pentti",
+      "last_name": "Juntunen",
+      "social_security_number": "130419-149A",
+      "phone_number": "+358409012345"
+    }
+  },
+  {
+    "owner_id": "9d6f7298-0c52-4a0f-8675-c5eeedc37187",
+    "timestamp": "2025-07-19T12:30:52.881719",
+    "x": 4065,
+    "y": -876,
+    "z": 157,
+    "owner": {
+      "first_name": "Marja",
+      "last_name": "Niskanen",
+      "social_security_number": "090920A488Y",
+      "phone_number": "+358402345678"
+    }
+  },
+  {
+    "owner_id": "b965607c-fa0f-4f8a-b582-b83fc6037596",
+    "timestamp": "2025-07-19T12:30:52.931696",
+    "x": 2639,
+    "y": 2469,
+    "z": 92,
+    "owner": {
+      "first_name": "Juhani",
+      "last_name": "Partanen",
+      "social_security_number": "150919-5397",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "fdd09871-8b5c-47f6-81c3-a7e31ec75600",
+    "timestamp": "2025-07-19T12:30:52.956769",
+    "x": -6857,
+    "y": -5876,
+    "z": 188,
+    "owner": {
+      "first_name": "Anja",
+      "last_name": "Rautiainen",
+      "social_security_number": "200919-6213",
+      "phone_number": "+358400123456"
+    }
+  },
+  {
+    "owner_id": "4f606b5a-c507-42d3-b297-63f26d1f7cd3",
+    "timestamp": "2025-07-19T12:30:52.981965",
+    "x": -5115,
+    "y": -5369,
+    "z": 229,
+    "owner": {
+      "first_name": "Ilkka",
+      "last_name": "Leinonen",
+      "social_security_number": "051019-6549",
+      "phone_number": "+358404567890"
+    }
+  },
+  {
+    "owner_id": "05e0d531-75bf-4fea-af0a-c7d8d7c40dda",
+    "timestamp": "2025-07-19T12:30:53.006620",
+    "x": 3713,
+    "y": 2602,
+    "z": 164,
+    "owner": {
+      "first_name": "Eeva",
+      "last_name": "Karhu",
+      "social_security_number": "240820A111N",
+      "phone_number": "+358408901234"
+    }
+  },
+  {
+    "owner_id": "a9e957b0-64d7-4952-9c26-0ed5bd0199e3",
+    "timestamp": "2025-07-19T12:30:53.048219",
+    "x": -3161,
+    "y": -3408,
+    "z": 122,
+    "owner": {
+      "first_name": "Mikael",
+      "last_name": "Huhtala",
+      "social_security_number": "170720A367L",
+      "phone_number": "+358402123456"
+    }
+  },
+  {
+    "owner_id": "567c34d2-8583-4afe-961c-8596ac9419f8",
+    "timestamp": "2025-07-19T12:30:53.073484",
+    "x": -5307,
+    "y": -4829,
+    "z": 118,
+    "owner": {
+      "first_name": "Elina",
+      "last_name": "Myllymäki",
+      "social_security_number": "150519-2644",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "1f0dd2d2-d14d-47be-b790-0e4c26d8eb36",
+    "timestamp": "2025-07-19T12:30:53.098407",
+    "x": 9319,
+    "y": -9279,
+    "z": 51,
+    "owner": {
+      "first_name": "Sakari",
+      "last_name": "Vanhanen",
+      "social_security_number": "221119-1947",
+      "phone_number": "+358401234567"
+    }
+  },
+  {
+    "owner_id": "b58085e4-34ed-4637-b3c7-4a4bad3afc7c",
+    "timestamp": "2025-07-19T12:30:53.123642",
+    "x": 2241,
+    "y": -2339,
+    "z": 174,
+    "owner": {
+      "first_name": "Kristiina",
+      "last_name": "Salo",
+      "social_security_number": "060219-881T",
+      "phone_number": "+358405678901"
+    }
+  },
+  {
+    "owner_id": "8f6d8823-ca36-4d2f-af67-35782b797b99",
+    "timestamp": "2025-07-19T12:30:53.148246",
+    "x": -3054,
+    "y": 4645,
+    "z": 225,
+    "owner": {
+      "first_name": "Jaakko",
+      "last_name": "Peltola",
+      "social_security_number": "251219-5692",
+      "phone_number": "+358409012345"
+    }
+  },
+  {
+    "owner_id": "1190e22b-e130-4b68-b6ba-3cd5c3a51280",
+    "timestamp": "2025-07-19T12:30:53.181778",
+    "x": -55,
+    "y": -2947,
+    "z": 86,
+    "owner": {
+      "first_name": "Satu",
+      "last_name": "Koskinen",
+      "social_security_number": "120419-312X",
+      "phone_number": "+358402345678"
+    }
+  },
+  {
+    "owner_id": "9fd901b9-3a4a-48ef-adb1-b550dc45896d",
+    "timestamp": "2025-07-19T12:30:53.206833",
+    "x": -3251,
+    "y": -3742,
+    "z": 52,
+    "owner": {
+      "first_name": "Reino",
+      "last_name": "Järvelä",
+      "social_security_number": "201119-331B",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "4b4708f8-0b8c-4c4a-ad2b-88a4972e20a1",
+    "timestamp": "2025-07-19T12:30:53.231855",
+    "x": -5242,
+    "y": 3263,
+    "z": 207,
+    "owner": {
+      "first_name": "Tarja",
+      "last_name": "Hietala",
+      "social_security_number": "141220A521N",
+      "phone_number": "+358400123456"
+    }
+  },
+  {
+    "owner_id": "647bab47-113a-4c7e-8744-996fa96e7d80",
+    "timestamp": "2025-07-19T12:30:53.256702",
+    "x": 9366,
+    "y": -1762,
+    "z": 282,
+    "owner": {
+      "first_name": "Asko",
+      "last_name": "Rajala",
+      "social_security_number": "170319-381K",
+      "phone_number": "+358404567890"
+    }
+  },
+  {
+    "owner_id": "52817a38-6e81-41cd-8060-64db4380dc62",
+    "timestamp": "2025-07-19T12:30:53.281709",
+    "x": 2763,
+    "y": 351,
+    "z": 73,
+    "owner": {
+      "first_name": "Minna",
+      "last_name": "Kukkonen",
+      "social_security_number": "280619-431P",
+      "phone_number": "+358408901234"
+    }
+  },
+  {
+    "owner_id": "33f54f7f-f095-49eb-bab9-fa83c6438f08",
+    "timestamp": "2025-07-19T12:30:53.306721",
+    "x": -2528,
+    "y": -5224,
+    "z": 284,
+    "owner": {
+      "first_name": "Jorma",
+      "last_name": "Tamminen",
+      "social_security_number": "161120A125C",
+      "phone_number": "+358402123456"
+    }
+  },
+  {
+    "owner_id": "3c797917-e566-4c8b-9c54-6cfafc919751",
+    "timestamp": "2025-07-19T12:30:53.331737",
+    "x": -594,
+    "y": 1109,
+    "z": 189,
+    "owner": {
+      "first_name": "Riitta",
+      "last_name": "Seppä",
+      "social_security_number": "231019-0680",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "e93c3865-93a7-42ea-bd1c-81a8823e8c8d",
+    "timestamp": "2025-07-19T12:30:53.356929",
+    "x": -5239,
+    "y": 4350,
+    "z": 158,
+    "owner": {
+      "first_name": "Vesa",
+      "last_name": "Kärkkäinen",
+      "social_security_number": "070919-685S",
+      "phone_number": "+358401234567"
+    }
+  },
+  {
+    "owner_id": "4e5d3f05-12fe-410e-be08-81d896706bda",
+    "timestamp": "2025-07-19T12:30:53.381917",
+    "x": -289,
+    "y": -2393,
+    "z": 126,
+    "owner": {
+      "first_name": "Leila",
+      "last_name": "Hämäläinen",
+      "social_security_number": "020119-509D",
+      "phone_number": "+358405678901"
+    }
+  },
+  {
+    "owner_id": "b51ea595-32bc-4f50-a615-06a441ba2c8a",
+    "timestamp": "2025-07-19T12:30:53.406996",
+    "x": -7631,
+    "y": 5958,
+    "z": 95,
+    "owner": {
+      "first_name": "Harri",
+      "last_name": "Koivunen",
+      "social_security_number": "080619-024N",
+      "phone_number": "+358409012345"
+    }
+  },
+  {
+    "owner_id": "94adcd54-c84b-4b74-a341-70636824e725",
+    "timestamp": "2025-07-19T12:30:53.431943",
+    "x": -6273,
+    "y": 2086,
+    "z": 169,
+    "owner": {
+      "first_name": "Tuija",
+      "last_name": "Laaksonen",
+      "social_security_number": "280719-8855",
+      "phone_number": "+358402345678"
+    }
+  },
+  {
+    "owner_id": "af6e3e1f-6a3d-487c-929b-7a62a543e00a",
+    "timestamp": "2025-07-19T12:30:53.457054",
+    "x": 4179,
+    "y": -2851,
+    "z": 83,
+    "owner": {
+      "first_name": "Raimo",
+      "last_name": "Salmi",
+      "social_security_number": "170820A370H",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "ca7f1729-d28e-4250-9497-075135bd0a76",
+    "timestamp": "2025-07-19T12:30:53.482067",
+    "x": 7666,
+    "y": -8191,
+    "z": 228,
+    "owner": {
+      "first_name": "Pirjo",
+      "last_name": "Tuomi",
+      "social_security_number": "211019-689R",
+      "phone_number": "+358400123456"
+    }
+  },
+  {
+    "owner_id": "02c15e9c-ff7f-46d0-b314-5e33ce80cfcd",
+    "timestamp": "2025-07-19T12:30:53.507024",
+    "x": 1800,
+    "y": 4210,
+    "z": 192,
+    "owner": {
+      "first_name": "Juha",
+      "last_name": "Karjalainen",
+      "social_security_number": "150519-064N",
+      "phone_number": "+358404567890"
+    }
+  },
+  {
+    "owner_id": "5e32d93d-8237-4b05-821c-fb52b9b0e207",
+    "timestamp": "2025-07-19T12:30:53.532045",
+    "x": 7769,
+    "y": -4696,
+    "z": 82,
+    "owner": {
+      "first_name": "Anneli",
+      "last_name": "Hiltunen",
+      "social_security_number": "021219-523R",
+      "phone_number": "+358408901234"
+    }
+  },
+  {
+    "owner_id": "c3bee8a0-4228-4fc1-9cf7-ba088b4d14ee",
+    "timestamp": "2025-07-19T12:30:53.557343",
+    "x": 2454,
+    "y": -7610,
+    "z": 143,
+    "owner": {
+      "first_name": "Mika",
+      "last_name": "Pitkänen",
+      "social_security_number": "240419-084A",
+      "phone_number": "+358402123456"
+    }
+  },
+  {
+    "owner_id": "a4df19e6-16b0-43b0-9bf4-756934f235eb",
+    "timestamp": "2025-07-19T12:30:53.581952",
+    "x": 2954,
+    "y": -5871,
+    "z": 252,
+    "owner": {
+      "first_name": "Sinikka",
+      "last_name": "Aaltonen",
+      "social_security_number": "070919-7241",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "c323abc3-887d-4f15-8b43-756ef9df827a",
+    "timestamp": "2025-07-19T12:30:53.623726",
+    "x": -4070,
+    "y": -5795,
+    "z": 52,
+    "owner": {
+      "first_name": "Tero",
+      "last_name": "Ojala",
+      "social_security_number": "220519-485S",
+      "phone_number": "+358401234567"
+    }
+  },
+  {
+    "owner_id": "0c6fc438-6326-4d6d-82d4-4bc33dee148c",
+    "timestamp": "2025-07-19T12:30:53.665301",
+    "x": -8913,
+    "y": 422,
+    "z": 141,
+    "owner": {
+      "first_name": "Kaarina",
+      "last_name": "Koskela",
+      "social_security_number": "270419-399D",
+      "phone_number": "+358405678901"
+    }
+  },
+  {
+    "owner_id": "add6ad16-c284-4304-a0e4-1cc39052adc3",
+    "timestamp": "2025-07-19T12:30:53.675224",
+    "x": 6950,
+    "y": -6591,
+    "z": 199,
+    "owner": {
+      "first_name": "Jari",
+      "last_name": "Leppänen",
+      "social_security_number": "280819-152A",
+      "phone_number": "+358409012345"
+    }
+  },
+  {
+    "owner_id": "29a67aaa-9ed8-44d4-8e08-9a68c8f28515",
+    "timestamp": "2025-07-19T12:30:53.698712",
+    "x": 5403,
+    "y": -8248,
+    "z": 84,
+    "owner": {
+      "first_name": "Marjatta",
+      "last_name": "Jokinen",
+      "social_security_number": "100819-470Y",
+      "phone_number": "+358402345678"
+    }
+  },
+  {
+    "owner_id": "ec6f50f8-5c8c-4932-8310-a191e58825bb",
+    "timestamp": "2025-07-19T12:30:53.723710",
+    "x": 1580,
+    "y": -5252,
+    "z": 157,
+    "owner": {
+      "first_name": "Esa",
+      "last_name": "Mattila",
+      "social_security_number": "140119-433P",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "f4e6ce39-9918-4be2-b81c-a91e31fd8169",
+    "timestamp": "2025-07-19T12:30:53.748780",
+    "x": -1264,
+    "y": 3348,
+    "z": 179,
+    "owner": {
+      "first_name": "Terttu",
+      "last_name": "Nurmi",
+      "social_security_number": "040119-787N",
+      "phone_number": "+358400123456"
+    }
+  },
+  {
+    "owner_id": "ab778764-ce5b-446b-8503-57637ec9e427",
+    "timestamp": "2025-07-19T12:30:53.773690",
+    "x": -339,
+    "y": -3521,
+    "z": 236,
+    "owner": {
+      "first_name": "Pertti",
+      "last_name": "Heikkilä",
+      "social_security_number": "120419-367P",
+      "phone_number": "+358404567890"
+    }
+  },
+  {
+    "owner_id": "53872964-ed1f-4610-a0cb-8fe0688b77bc",
+    "timestamp": "2025-07-19T12:30:53.807041",
+    "x": -1349,
+    "y": 1095,
+    "z": 144,
+    "owner": {
+      "first_name": "Irma",
+      "last_name": "Mäkelä",
+      "social_security_number": "270119-731P",
+      "phone_number": "+358408901234"
+    }
+  },
+  {
+    "owner_id": "2dc28115-2668-4adf-a8c7-b6fae67e77e3",
+    "timestamp": "2025-07-19T12:30:53.832048",
+    "x": -246,
+    "y": 1025,
+    "z": 162,
+    "owner": {
+      "first_name": "Pasi",
+      "last_name": "Peltonen",
+      "social_security_number": "120219-294R",
+      "phone_number": "+358402123456"
+    }
+  },
+  {
+    "owner_id": "33712386-eda1-45cd-8e38-e44759133f9d",
+    "timestamp": "2025-07-19T12:30:53.857091",
+    "x": 8467,
+    "y": -784,
+    "z": 151,
+    "owner": {
+      "first_name": "Aila",
+      "last_name": "Hakala",
+      "social_security_number": "131219-6298",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "a28a04bb-699d-4f36-a9ed-93eb66c11b91",
+    "timestamp": "2025-07-19T12:30:53.882038",
+    "x": 4509,
+    "y": -188,
+    "z": 126,
+    "owner": {
+      "first_name": "Helena",
+      "last_name": "Virtanen",
+      "social_security_number": "300919-3283",
+      "phone_number": "+358401234567"
+    }
+  },
+  {
+    "owner_id": "ee900800-0cd6-4fd7-944f-40475f1ae5e7",
+    "timestamp": "2025-07-19T12:30:53.906911",
+    "x": -7619,
+    "y": 8200,
+    "z": 96,
+    "owner": {
+      "first_name": "Tapio",
+      "last_name": "Nieminen",
+      "social_security_number": "210319-7269",
+      "phone_number": "+358405678901"
+    }
+  },
+  {
+    "owner_id": "7a82607b-8949-431c-b9f3-2ee905c17fb7",
+    "timestamp": "2025-07-19T12:30:53.940331",
+    "x": -2855,
+    "y": 8697,
+    "z": 30,
+    "owner": {
+      "first_name": "Ritva",
+      "last_name": "Lehtonen",
+      "social_security_number": "030620A3474",
+      "phone_number": "+358409012345"
+    }
+  },
+  {
+    "owner_id": "424fe118-056c-4e4a-a8ce-8f148e12e033",
+    "timestamp": "2025-07-19T12:30:53.965344",
+    "x": -3513,
+    "y": -767,
+    "z": 194,
+    "owner": {
+      "first_name": "Kari",
+      "last_name": "Mäkinen",
+      "social_security_number": "041119-5879",
+      "phone_number": "+358402345678"
+    }
+  },
+  {
+    "owner_id": "342bd8a1-5b75-454d-8373-b36c316e924e",
+    "timestamp": "2025-07-19T12:30:53.990198",
+    "x": 6187,
+    "y": -3226,
+    "z": 101,
+    "owner": {
+      "first_name": "Leena",
+      "last_name": "Järvinen",
+      "social_security_number": "101119-880L",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "1506cebf-c8ee-4419-a311-7b656f295390",
+    "timestamp": "2025-07-19T12:30:54.015554",
+    "x": 906,
+    "y": 3103,
+    "z": 115,
+    "owner": {
+      "first_name": "Seppo",
+      "last_name": "Korhonen",
+      "social_security_number": "171020A4346",
+      "phone_number": "+358400123456"
+    }
+  },
+  {
+    "owner_id": "8186a15a-332e-4dc1-bb98-c81d43e79b50",
+    "timestamp": "2025-07-19T12:30:54.040394",
+    "x": -5667,
+    "y": -5541,
+    "z": 74,
+    "owner": {
+      "first_name": "Merja",
+      "last_name": "Lahtinen",
+      "social_security_number": "220819-837J",
+      "phone_number": "+358404567890"
+    }
+  },
+  {
+    "owner_id": "0028c96e-3512-4361-a669-72d702f740b0",
+    "timestamp": "2025-07-19T12:30:54.073796",
+    "x": -3437,
+    "y": -8720,
+    "z": 138,
+    "owner": {
+      "first_name": "Antti",
+      "last_name": "Kettunen",
+      "social_security_number": "180919-185R",
+      "phone_number": "+358408901234"
+    }
+  },
+  {
+    "owner_id": "515e9bd1-bcbb-46ef-a8b6-cb75f117c479",
+    "timestamp": "2025-07-19T12:30:54.098804",
+    "x": -82,
+    "y": -2785,
+    "z": 110,
+    "owner": {
+      "first_name": "Mikko",
+      "last_name": "Laine",
+      "social_security_number": "310720A340S",
+      "phone_number": "+358402345678"
+    }
+  },
+  {
+    "owner_id": "a1a1c911-7b58-4dfa-b8ec-3494217744bd",
+    "timestamp": "2025-07-19T12:30:54.123987",
+    "x": 3476,
+    "y": 24,
+    "z": 234,
+    "owner": {
+      "first_name": "Sari",
+      "last_name": "Heikkinen",
+      "social_security_number": "040319-739R",
+      "phone_number": "+358406789012"
+    }
+  },
+  {
+    "owner_id": "1c1c381c-620f-4540-9ba0-e2fd1635f403",
+    "timestamp": "2025-07-19T15:34:26.729610",
+    "x": -876,
+    "y": 456,
+    "z": 243,
+    "owner": {
+      "first_name": "Olli",
+      "last_name": "Miettinen",
+      "social_security_number": "150519-8822",
+      "phone_number": "+358401234567"
+    }
+  }

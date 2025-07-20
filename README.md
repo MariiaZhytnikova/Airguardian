@@ -7,7 +7,7 @@ A secure and ef- ficient system will ensure real-time detection of unauthorized 
 existed docker
 
 	docker start drone-postgres
-
+	docker ps (to check running containers)
 app:
 
 	uvicorn main:app --reload 
@@ -16,7 +16,15 @@ app:
 
 web:
 
-	http://localhost:8000
+	http://localhost:8000/docs
+	http://127.0.0.1:8000/drones
+	http://127.0.0.1:8000/health
+	http://127.0.0.1:8000/nfz
+	http://127.0.0.1:8000/nfz-dev #temp
+
+Connect with fronend
+python3 -m http.server 8080 
+http://localhost:8080/
 
 
 ### Install dependencies
@@ -296,3 +304,48 @@ Background tasking	Run tasks outside main server	Celery + Redis
 Database storage	Save violations permanently	PostgreSQL + SQLAlchemy
 Logging & errors	Handle problems and debugging	logging + FastAPI
 Secured access	Block unauthorized data views	Header + .env
+
+################################################################################
+## 🚀 Run Instructions
+
+### 🐘 1. Start PostgreSQL with Docker
+Start the existing PostgreSQL container (e.g., drone-postgres):
+
+```bash
+docker start drone-postgres
+```
+Verify that it's running:
+```bash
+docker ps
+```
+### 2. Run the Backend App
+Using uvicorn directly:
+```bash
+uvicorn main:app --reload
+```
+If you're using Poetry:
+```bash
+poetry run uvicorn main:app --reload
+```
+🔄 The --reload flag enables automatic code reload on changes (useful in development).
+
+### 3. API Endpoints
+Once the app is running, you can access the following endpoints:
+
+Swagger/OpenAPI Docs: http://localhost:8000/docs
+
+Health Check: http://127.0.0.1:8000/health
+
+Drones API: http://127.0.0.1:8000/drones
+
+No-Fly Zones API: http://127.0.0.1:8000/nfz
+
+Dev/Test NFZ Endpoint: http://127.0.0.1:8000/nfz-dev (temporary)
+
+### 4. Run the Frontend (Static)
+You can serve a static frontend using Python's built-in HTTP server:
+
+```bash
+python3 -m http.server 8080
+```
+Then open your browser to: http://localhost:8080/
