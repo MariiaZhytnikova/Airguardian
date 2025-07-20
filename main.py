@@ -6,6 +6,8 @@ from typing import List
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.cors import CORSMiddleware
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import httpx
@@ -42,7 +44,7 @@ app.add_middleware(
 @app.on_event("startup")
 def on_startup():
 	Base.metadata.create_all(bind=engine)
-	print("🗃️ Tables created.")
+	print("  🗃️       Tables created.")
 
 @app.get("/health")
 def health_check():
@@ -82,70 +84,88 @@ def get_violations(
 
 @app.get("/nfz-dev")  # A temporary endpoint without header requirement
 def get_violations_dev(
-    db: Session = Depends(get_db)
+	db: Session = Depends(get_db)
 ):
-    since = datetime.utcnow() - timedelta(hours=24)
-    violations = (
-        db.query(Violation)
-        .filter(Violation.timestamp >= since)
-        .options(joinedload(Violation.owner))
-        .all()
-    )
-    return [ViolationOut.from_orm(v) for v in violations]
+	since = datetime.utcnow() - timedelta(hours=24)
+	violations = (
+		db.query(Violation)
+		.filter(Violation.timestamp >= since)
+		.options(joinedload(Violation.owner))
+		.all()
+	)
+	return [ViolationOut.from_orm(v) for v in violations]
 # # • GET /nfz: Returns violations from the last 24 hours
+# Use a proxy/backend to attach the secret
+@app.get("/frontend-nfz")
+def frontend_proxy_nfz(db: Session = Depends(get_db)):
+	# This does NOT expose the secret to the client
+	if X_SECRET is None:
+		raise HTTPException(status_code=500, detail="Missing secret key")
+
+	# Internally call the protected route
+	scan_for_violations.delay()
+	since = datetime.utcnow() - timedelta(hours=24)
+	violations = (
+		db.query(Violation)
+		.filter(Violation.timestamp >= since)
+		.options(joinedload(Violation.owner))
+		.all()
+	)
+	return [ViolationOut.from_orm(v) for v in violations]
+
 @app.get("/map")
-async def map_image(
-	x_secret: str = Header(...),
-):
-	if x_secret != X_SECRET:
-		raise HTTPException(status_code=401, detail="Unauthorized")
+async def map_image():
 
-	# Get real-time drones
-	try:
-		drones = await fetch_drones()
-	except httpx.RequestError as exc:
-		raise HTTPException(status_code=502, detail=f"Error contacting drones API: {exc}")
-	except httpx.HTTPStatusError as exc:
-		raise HTTPException(status_code=exc.response.status_code, detail=f"Drones API error: {exc.response.text}")
-
-	# NFZ radius (assumption: 100 meters, origin at (0,0))
-	NFZ_RADIUS = 100.0
-
-	fig, ax = plt.subplots(figsize=(6, 6))
-
-	# Draw the no-fly zone circle
-	no_fly_zone = patches.Circle((0, 0), radius=1000, edgecolor='blue', facecolor='lightblue', alpha=0.3, label='No-Fly Zone')
-	ax.add_patch(no_fly_zone)
-
-	ax.set_xlim(-1100, 1100)
-	ax.set_ylim(-1100, 1100)
-	ax.set_aspect('equal', 'box')  # keep circle shape
-	ax.legend()
-	plt.show()
-
+	# Try fetching drones only once
 	try:
 		drones = await fetch_drones()
 	except Exception as e:
 		raise HTTPException(status_code=502, detail=f"Failed to fetch drones: {str(e)}")
 
-	NFZ_RADIUS = 100.0  # або інше значення
+	NFZ_RADIUS = 1000
 
+	fig, ax = plt.subplots(figsize=(8, 8))
+
+	# Draw smaller no-fly zone circle at center
+	no_fly_zone = patches.Circle(
+		(0, 0),
+		radius=NFZ_RADIUS,
+		edgecolor='blue',
+		facecolor='lightblue',
+		alpha=0.3,
+		label='No-Fly Zone (radius=100)'
+	)
+	ax.add_patch(no_fly_zone)
+
+	# Plot drones (red if inside NFZ, green if outside)
 	for drone in drones:
 		try:
 			x = drone["x"]
 			y = drone["y"]
 		except KeyError:
-			continue  # пропустити дронів без координат
+			continue
 
 		dist = (x**2 + y**2) ** 0.5
-		color = "red" if dist < NFZ_RADIUS else "green"
+		color = "red" if dist <= NFZ_RADIUS else "green"
 		ax.scatter(x, y, c=color)
 
-	ax.set_xlim(-1100, 1100)
-	ax.set_ylim(-1100, 1100)
-	ax.set_title("Live Drones & NFZ")
+		if dist <= NFZ_RADIUS:
+			try:
+				owner = await fetch_owner(serial)
+				owner_id = owner.get("pilotId", "unknown")
+			except Exception:
+				owner_id = "unknown"
+
+			# Add label slightly above the drone
+			ax.text(x, y + 100, owner_id, fontsize=8, color='black', ha='center')
+
+	ax.set_xlim(-4000, 4000)
+	ax.set_ylim(-4000, 4000)
+	ax.set_aspect('equal', 'box')
+	ax.set_title("Live Drones & No-Fly Zone")
 	ax.set_xlabel("X")
 	ax.set_ylabel("Y")
+	ax.legend()
 
 	buf = io.BytesIO()
 	plt.savefig(buf, format="png")
@@ -156,13 +176,13 @@ async def map_image(
 
 @app.get("/nfz-dev")  # A temporary endpoint without header requirement
 def get_violations_dev(
-    db: Session = Depends(get_db)
+	db: Session = Depends(get_db)
 ):
-    since = datetime.utcnow() - timedelta(hours=24)
-    violations = (
-        db.query(Violation)
-        .filter(Violation.timestamp >= since)
-        .options(joinedload(Violation.owner))
-        .all()
-    )
-    return [ViolationOut.from_orm(v) for v in violations]
+	since = datetime.utcnow() - timedelta(hours=24)
+	violations = (
+		db.query(Violation)
+		.filter(Violation.timestamp >= since)
+		.options(joinedload(Violation.owner))
+		.all()
+	)
+	return [ViolationOut.from_orm(v) for v in violations]

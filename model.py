@@ -19,6 +19,7 @@ class Owner(Base):
 class Violation(Base):
 	__tablename__ = "violations"
 	id = Column(Integer, primary_key=True, index=True)
+	drone_id = Column(String)
 	owner_id = Column(String, ForeignKey("owners.id"))
 	x = Column(Float)
 	y = Column(Float)
