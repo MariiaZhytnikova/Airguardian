@@ -113,7 +113,7 @@ To stop PostgreSQL running in Docker, use command:
 	docker stop database_name
 ```
 
-To stop delete PostgreSQL database:
+To delete PostgreSQL database:
 ```bash
 	docker rm database_name
 ```
