@@ -110,7 +110,7 @@ Verify that it's running:
 
 To stop PostgreSQL running in Docker, use command:
 ```bash
-	docker stop drone-postgres
+	docker stop database_name
 ```
 
 ### 2. Run the Backend App
