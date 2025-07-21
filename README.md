@@ -71,8 +71,8 @@ Verify the installation:
 
 `.env` file used to securely store all necessary values.
 
-	- external API URLs
-	- required headers (e.g. API secrets) must match the values stored in your `.env` file. 
+   - external API URLs
+   - required headers (e.g. API secrets) must match the values stored in your `.env` file. 
 
 See `.env.example` for a reference and descriptions of each variable.
 
@@ -109,6 +109,11 @@ To stop PostgreSQL running in Docker, use command:
 	docker stop database_name
 ```
 
+To stop delete PostgreSQL database:
+```bash
+	docker rm database_name
+```
+
 ### 2. Run the Backend App
 Using uvicorn directly:
 ```bash
@@ -122,7 +127,7 @@ If you're using Poetry:
 🔄 The --reload flag enables automatic code reload on changes (useful in development).
 Show the Process Using Port 8000 (in case you need to kill them)
 ```bash
-lsof -i :8000
+	lsof -i :8000
 ```
 
 ### ⚙️ 2. Start Celery service for 
