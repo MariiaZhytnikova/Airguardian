@@ -8,10 +8,6 @@ __pycache__/
 # Bytecode in any subfolder (like app/__pycache__)
 **/__pycache__/
 **/*.py[cod]
-
-# Celery beat schedule file
-celerybeat-schedule
-
 # Log files
 *.log
 app.log
