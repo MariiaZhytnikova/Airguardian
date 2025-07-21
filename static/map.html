@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Live Drone Map</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+    }
+    #mapCanvas {
+      border: 1px solid #ccc;
+      margin-top: 20px;
+	  border-radius: 5px;
+    }
+    #loader {
+      display: none;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h1>Live Drone Map</h1>
+  <p>Last updated: <span id="timestamp">-</span></p>
+  <div id="loader">Loading drone data...</div>
+  <canvas id="mapCanvas" width="1200" height="800"></canvas>
+
+  <script>
+    const canvas = document.getElementById("mapCanvas");
+    const ctx = canvas.getContext("2d");
+    const loader = document.getElementById("loader");
+    const timestamp = document.getElementById("timestamp");
+
+    const CENTER_X = canvas.width / 2;
+    const CENTER_Y = canvas.height / 2;
+    const SCALE = 0.1; // 10px = 100 units
+
+    function drawMap(data) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw NFZ
+      ctx.beginPath();
+      ctx.arc(CENTER_X, CENTER_Y, data.nfz_radius * SCALE, 0, 2 * Math.PI);
+      ctx.fillStyle = 'rgba(173, 216, 230, 0.3)';
+      ctx.fill();
+      ctx.strokeStyle = 'blue';
+      ctx.stroke();
+
+      // Draw Drones
+      data.drones.forEach(drone => {
+        const x = CENTER_X + drone.x * SCALE;
+        const y = CENTER_Y - drone.y * SCALE; // invert Y for canvas
+        const dist = Math.sqrt(drone.x ** 2 + drone.y ** 2);
+
+        ctx.beginPath();
+        ctx.arc(x, y, 6, 0, 2 * Math.PI);
+        ctx.fillStyle = dist <= data.nfz_radius ? 'red' : 'green';
+        ctx.fill();
+
+        ctx.fillStyle = 'black';
+        ctx.font = "10px Arial";
+        ctx.fillText(drone.owner_id || "unknown", x, y - 10);
+      });
+    }
+
+    async function loadMapData() {
+      loader.style.display = "block";
+      try {
+        const res = await fetch("http://localhost:8000/api/map-data");
+        const data = await res.json();
+        drawMap(data);
+        timestamp.textContent = new Date().toLocaleTimeString();
+      } catch (e) {
+        console.error("Failed to fetch map data:", e);
+      } finally {
+        loader.style.display = "none";
+      }
+    }
+
+    // Initial load + auto-refresh every 10s
+    loadMapData();
+    setInterval(loadMapData, 5000);
+  </script>
+</body>
+</html>

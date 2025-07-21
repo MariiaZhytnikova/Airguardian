@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 from typing import List
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.middleware.cors import CORSMiddleware
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -13,25 +12,23 @@ import matplotlib.patches as patches
 import httpx
 import os
 import io
-
-
-
-########### OWN ##########################
-from fetcher import fetch_drones, fetch_owner
-from drone_db import SessionLocal, engine
-from schemas import ViolationOut, ViolationInput, OwnerOut
-from model import Owner, Violation, Base
-from utils import get_db
-from tasks import scan_for_violations
-from logger import logger
-from error_handlers import (
-    validation_exception_handler,
-    http_exception_handler,
-    unhandled_exception_handler
-)
 from fastapi.exceptions import RequestValidationError
 from fastapi import HTTPException
+from fastapi.staticfiles import StaticFiles
 
+########### OWN ##########################
+from app.fetcher import fetch_drones, fetch_owner
+from app.drone_db import SessionLocal, engine
+from app.schemas import ViolationOut, ViolationInput, OwnerOut
+from app.model import Owner, Violation, Base
+from app.utils import get_db
+from app.tasks import scan_for_violations
+from app.logger import logger
+from app.error_handlers import (
+	validation_exception_handler,
+	http_exception_handler,
+	unhandled_exception_handler
+)
 ####################################
 
 load_dotenv()
@@ -39,6 +36,7 @@ X_SECRET = os.getenv("X_SECRET")
 DRONES_LIST_API = os.getenv("DRONES_LIST_API")
 
 app = FastAPI()
+#app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 ######################################################
 app.add_exception_handler(RequestValidationError, validation_exception_handler)
@@ -49,7 +47,7 @@ app.add_exception_handler(Exception, unhandled_exception_handler)
 #Allows frontend js to communicate with FASTAPI backend
 app.add_middleware(
 	CORSMiddleware,
-	allow_origins=["*"],  # For development only
+	allow_origins=["http://localhost:8080"],
 	allow_credentials=True,
 	allow_methods=["*"],
 	allow_headers=["*"],
@@ -189,15 +187,11 @@ async def map_image():
 
 	return StreamingResponse(buf, media_type="image/png")
 
-# @app.get("/nfz-dev")  # A temporary endpoint without header requirement
-# def get_violations_dev(
-# 	db: Session = Depends(get_db)
-# ):
-# 	since = datetime.utcnow() - timedelta(hours=24)
-# 	violations = (
-# 		db.query(Violation)
-# 		.filter(Violation.timestamp >= since)
-# 		.options(joinedload(Violation.owner))
-# 		.all()
-# 	)
-# 	return [ViolationOut.from_orm(v) for v in violations]
+@app.get("/api/map-data")
+async def get_map_data():
+	try:
+		drones = await fetch_drones()
+	except Exception as e:
+		raise HTTPException(status_code=502, detail=f"Failed to fetch drones: {str(e)}")
+	
+	return {"drones": drones, "nfz_radius": 1000}

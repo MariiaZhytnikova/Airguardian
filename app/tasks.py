@@ -1,15 +1,15 @@
 from celery import shared_task
-from celery_app import app
+from app.celery_app import app
 import httpx
 from datetime import datetime
 from sqlalchemy.orm import Session
 from dotenv import load_dotenv
 import os
 
-from drone_db import SessionLocal, Base, engine
-from model import Violation, Owner
-from schemas import OwnerOut
-from utils import is_in_no_fly_zone, report_violation
+from app.drone_db import SessionLocal, Base, engine
+from app.model import Violation, Owner
+from app.schemas import OwnerOut
+from app.utils import is_in_no_fly_zone, report_violation
 
 load_dotenv()
 

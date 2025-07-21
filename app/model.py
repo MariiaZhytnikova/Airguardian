@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, DateTime, Float, ForeignKey
 from sqlalchemy.orm import relationship
 import datetime
 
-from drone_db import Base
+from app.drone_db import Base
 
 class Owner(Base):
 	__tablename__ = "owners"

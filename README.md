@@ -86,14 +86,14 @@ See `.env.example` for a reference and descriptions of each variable.
 
 If PostgreSQL database not yet created:
 
-	docker run --name drone-postgres \
+	docker run --name database_name \
 	  -e POSTGRES_USER=user_name \
 	  -e POSTGRES_PASSWORD=user_password \
 	  -e POSTGRES_DB=database_name \
 	  -p 5432:5432 \
 	  -d postgres
 
-Where user_name, user_password, database_name should correspond data from .env (see .env.example foe reference)
+Where user_name, user_password, database_name should correspond data from .env (see .env.example for reference)
 
 	DATABASE_URL=postgresql://user_name:user_password@localhost:5432/database_name
 
@@ -116,15 +116,18 @@ To stop PostgreSQL running in Docker, use command:
 ### 2. Run the Backend App
 Using uvicorn directly:
 ```bash
-	uvicorn main:app --reload
+	uvicorn app.main:app --reload
 ```
 
 If you're using Poetry:
 ```bash
-	poetry run uvicorn main:app --reload
+	poetry run uvicorn app.main:app --reload
 ```
-
 🔄 The --reload flag enables automatic code reload on changes (useful in development).
+Show the Process Using Port 8000 (in case you need to kill them)
+```bash
+lsof -i :8000
+```
 
 ### ⚙️ 2. Start Celery service for 
 
@@ -137,7 +140,7 @@ Using Celery directly:
 
 If you're using Poetry:
 ```bash
-	poetry run celery -A celery_app worker --beat --loglevel=info
+	poetry run celery -A app.celery_app worker --beat --loglevel=info
 ```
 This command starts both the worker and the beat scheduler. The worker processes tasks, and beat periodically triggers scheduled jobs (like fetching drone data).
 
@@ -168,6 +171,7 @@ Real-time map:
 You can serve a static frontend using Python's built-in HTTP server:
 
 ```bash
+cd static
 python3 -m http.server 8080
 ```
 Then open your browser to: http://localhost:8080/
