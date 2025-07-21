@@ -44,3 +44,4 @@ coverage.xml
 *.pid
 
 poetry.lock
+celerybeat-schedule
