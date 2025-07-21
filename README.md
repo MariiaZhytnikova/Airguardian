@@ -29,8 +29,6 @@ Make sure you have the following packages installed (e.g. via `poetry` or `pip`)
 	- requests (>=2.32.4,<3.0.0)
 	- psycopg2-binary (>=2.9.10,<3.0.0)
 	- celery (>=5.5.3,<6.0.0)
-	- numpy (>=1.24,<2.0)
-	- matplotlib (>=3.10.3,<4.0.0)
 	- redis (>=6.2.0,<7.0.0)
 
 ## 📥 Installation of Dependencies
@@ -67,8 +65,6 @@ Verify the installation:
 	  requests>=2.32.4,<3.0.0 \
 	  psycopg2-binary>=2.9.10,<3.0.0 \
 	  celery>=5.5.3,<6.0.0 \
-	  numpy>=1.24,<2.0 \
-	  matplotlib>=3.10.3,<4.0.0 \
 	  redis>=6.2.0,<7.0.0
 
 ### 🔐 Environment Variables
@@ -170,7 +166,7 @@ No-Fly Zones API (This API requires a secret header for authorization, Make sure
 
 Real-time map: 
 
-	http://localhost:8080/map
+	http://localhost:8080/map-data
 
 ### 4. Run the Frontend (Static)
 You can serve a static frontend using Python's built-in HTTP server:

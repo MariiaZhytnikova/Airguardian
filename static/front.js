@@ -31,13 +31,13 @@ function displayViolations(violations) {
 		violationElement.innerHTML = `
 			<h3>Violation at (${violation.x}, ${violation.y}, ${violation.z})</h3>
 			<p>Time: ${new Date(violation.timestamp).toLocaleString()}</p>
-			<p>Owner: ${violation.owner.first_name} ${violation.owner.last_name}</p>
-			<p>Contact: ${violation.owner.phone_number}</p>
 		`;
-		
 		container.appendChild(violationElement);
 	});
 }
 
 // Call this function when your page loads
 document.addEventListener('DOMContentLoaded', fetchViolations);
+
+//<p>Owner: ${violation.owner.first_name} ${violation.owner.last_name}</p>
+//<p>Contact: ${violation.owner.phone_number}</p> 

@@ -1,20 +1,16 @@
 from fastapi import FastAPI, Depends, HTTPException, Header, Query
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import StreamingResponse
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+
 from sqlalchemy.orm import Session, joinedload
 from datetime import datetime, timedelta
 from typing import List
 from dotenv import load_dotenv
-from fastapi.middleware.cors import CORSMiddleware
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
+
 import httpx
 import os
-import io
-from fastapi.exceptions import RequestValidationError
-from fastapi import HTTPException
-from fastapi.staticfiles import StaticFiles
 
 ########### OWN ##########################
 from app.fetcher import fetch_drones, fetch_owner
@@ -36,7 +32,6 @@ X_SECRET = os.getenv("X_SECRET")
 DRONES_LIST_API = os.getenv("DRONES_LIST_API")
 
 app = FastAPI()
-#app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 ######################################################
 app.add_exception_handler(RequestValidationError, validation_exception_handler)
@@ -63,16 +58,6 @@ def on_startup():
 def health_check():
 	return {"success": "ok"}
 
-# @app.get("/drones")
-# async def proxy_drones():
-# 	try:
-# 		drones = await fetch_drones()
-# 	except httpx.RequestError as exc:
-# 		raise HTTPException(status_code=502, detail=f"Error contacting drones API: {exc}")
-# 	except httpx.HTTPStatusError as exc:
-# 		raise HTTPException(status_code=exc.response.status_code, detail=f"Drones API error: {exc.response.text}")
-
-# 	return drones
 logger.info("App starting...")
 @app.get("/drones")
 async def proxy_drones(limit: int = Query(10, gt=0, le=100)):
@@ -126,66 +111,6 @@ def frontend_proxy_nfz(db: Session = Depends(get_db)):
 		.all()
 	)
 	return [ViolationOut.from_orm(v) for v in violations]
-
-@app.get("/map")
-async def map_image():
-
-	# Try fetching drones only once
-	try:
-		drones = await fetch_drones()
-	except Exception as e:
-		raise HTTPException(status_code=502, detail=f"Failed to fetch drones: {str(e)}")
-
-	NFZ_RADIUS = 1000
-
-	fig, ax = plt.subplots(figsize=(8, 8))
-
-	# Draw smaller no-fly zone circle at center
-	no_fly_zone = patches.Circle(
-		(0, 0),
-		radius=NFZ_RADIUS,
-		edgecolor='blue',
-		facecolor='lightblue',
-		alpha=0.3,
-		label='No-Fly Zone (radius=100)'
-	)
-	ax.add_patch(no_fly_zone)
-
-	# Plot drones (red if inside NFZ, green if outside)
-	for drone in drones:
-		try:
-			x = drone["x"]
-			y = drone["y"]
-		except KeyError:
-			continue
-
-		dist = (x**2 + y**2) ** 0.5
-		color = "red" if dist <= NFZ_RADIUS else "green"
-		ax.scatter(x, y, c=color)
-
-		if dist <= NFZ_RADIUS:
-			try:
-				owner_id = drone["owner_id"]
-			except Exception:
-				owner_id = "unknown"
-
-			# Add label slightly above the drone
-			ax.text(x, y + 100, owner_id, fontsize=8, color='black', ha='center')
-
-	ax.set_xlim(-4000, 4000)
-	ax.set_ylim(-4000, 4000)
-	ax.set_aspect('equal', 'box')
-	ax.set_title("Live Drones & No-Fly Zone")
-	ax.set_xlabel("X")
-	ax.set_ylabel("Y")
-	ax.legend()
-
-	buf = io.BytesIO()
-	plt.savefig(buf, format="png")
-	plt.close(fig)
-	buf.seek(0)
-
-	return StreamingResponse(buf, media_type="image/png")
 
 @app.get("/api/map-data")
 async def get_map_data():
