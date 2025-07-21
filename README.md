@@ -160,7 +160,7 @@ Drones API:
 	
  	http://localhost:8000/drones
 
-No-Fly Zones API (This API requires a secret header for authorization, Make sure to set the `X-SECRET-KEY` in your `.env` file for successful requests.): 
+No-Fly Zones API (This API requires a secret header for authorization, Make sure to set the `X-SECRET-KEY` in your `.env` file for successful requests): 
 
 	http://localhost:8000/nfz
 
