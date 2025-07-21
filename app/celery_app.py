@@ -1,8 +1,8 @@
 from celery import Celery
-from app import tasks
 
 
-app = Celery('tasks', broker='redis://localhost:6379/0')
+
+app = Celery('tasks', broker='redis://localhost:6379/0', include=["app.tasks"])
 
 app.conf.beat_schedule = {
 	'scan-every-10-seconds': {
@@ -14,3 +14,4 @@ app.conf.beat_schedule = {
 app.conf.timezone = 'UTC'
 
 
+#import tasks

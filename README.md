@@ -86,14 +86,14 @@ See `.env.example` for a reference and descriptions of each variable.
 
 If PostgreSQL database not yet created:
 
-	docker run --name drone-postgres \
+	docker run --name database_name \
 	  -e POSTGRES_USER=user_name \
 	  -e POSTGRES_PASSWORD=user_password \
 	  -e POSTGRES_DB=database_name \
 	  -p 5432:5432 \
 	  -d postgres
 
-Where user_name, user_password, database_name should correspond data from .env (see .env.example foe reference)
+Where user_name, user_password, database_name should correspond data from .env (see .env.example for reference)
 
 	DATABASE_URL=postgresql://user_name:user_password@localhost:5432/database_name
 
@@ -137,14 +137,10 @@ Using Celery directly:
 ```bash
 	celery -A celery_app worker --beat --loglevel=info
 ```
-Using Celery with poetry
-```bash
-	poetry run celery -A app.tasks worker --loglevel=info   !!!!!!!!!ASK MARIA!!!!!!!!!
-```
 
 If you're using Poetry:
 ```bash
-	poetry run celery -A celery_app worker --beat --loglevel=info
+	poetry run celery -A app.celery_app worker --beat --loglevel=info
 ```
 This command starts both the worker and the beat scheduler. The worker processes tasks, and beat periodically triggers scheduled jobs (like fetching drone data).
 

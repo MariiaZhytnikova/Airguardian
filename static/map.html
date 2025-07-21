@@ -1,42 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Drone Map</title>
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-			text-align: center;
-		}
-		#map {
-			max-width: 90%;
-			border: 1px solid #ccc;
-			margin-top: 20px;
-		}
-	</style>
-</head>
-<body>
-	<h1>Live Drone Map</h1>
-	<p>Last updated: <span id="timestamp">-</span></p>
-	<img id="map" src="" alt="Drone Map Image">
-
-	<script>
-		async function loadMap() {
-			const mapImage = document.getElementById("map");
-			const timestamp = document.getElementById("timestamp");
-			const ts = new Date().toLocaleTimeString();
-
-			// Prevent caching by appending timestamp
-			mapImage.src = "http://localhost:8000/map?t=" + new Date().getTime();
-			timestamp.textContent = ts;
-		}
-
-		// Load map immediately and refresh every 10 seconds
-		loadMap();
-		setInterval(loadMap, 10000);
-	</script>
-</body>
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,7 +79,7 @@
 
     // Initial load + auto-refresh every 10s
     loadMapData();
-    setInterval(loadMapData, 10000);
+    setInterval(loadMapData, 5000);
   </script>
 </body>
 </html>

@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import os
 
 from app.drone_db import SessionLocal, Base, engine
-from app. model import Violation, Owner
+from app.model import Violation, Owner
 from app.schemas import OwnerOut
 from app.utils import is_in_no_fly_zone, report_violation
 
