@@ -28,6 +28,7 @@ from app.error_handlers import (
 # ---------------------------------------------------------
 
 app = FastAPI()
+X_SECRET = settings.X_SECRET
 
 # ---------------------------------------------------------
 # Exception Handlers
