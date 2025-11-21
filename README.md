@@ -78,74 +78,27 @@ See `.env.example` for a reference and descriptions of each variable.
 
 ## 🚀 Run Instructions
 
-### 🐘 1. Start PostgreSQL with Docker
+### 🐳 1. Run the Entire App with Docker (recommended)
 
-If PostgreSQL database not yet created:
+Make sure your .env file is configured (see .env.example).
 
-	docker run --name database_name \
-	  -e POSTGRES_USER=user_name \
-	  -e POSTGRES_PASSWORD=user_password \
-	  -e POSTGRES_DB=database_name \
-	  -p 5432:5432 \
-	  -d postgres
+Then start everything:
 
-Where user_name, user_password, database_name should correspond data from .env (see .env.example for reference)
+		make up
 
-	DATABASE_URL=postgresql://user_name:user_password@localhost:5432/database_name
+or
 
-Start the existing PostgreSQL container (e.g., database_name):
+		docker compose up --build
 
-```bash
-	docker start database_name
-```
+Stop all services:
 
-Verify that it's running:
-```bash
-	docker ps
-```
+		make down
 
-To stop PostgreSQL running in Docker, use command:
-```bash
-	docker stop database_name
-```
+Check running containers:
 
-To delete PostgreSQL database:
-```bash
-	docker rm database_name
-```
+		docker ps
 
-### 2. Run the Backend App
-Using uvicorn directly:
-```bash
-	uvicorn app.main:app --reload
-```
-
-If you're using Poetry:
-```bash
-	poetry run uvicorn app.main:app --reload
-```
-🔄 The --reload flag enables automatic code reload on changes (useful in development).
-Show the Process Using Port 8000 (in case you need to kill them)
-```bash
-	lsof -i :8000
-```
-
-### ⚙️ 2. Start Celery service for 
-
-Celery is used to run background tasks, such as periodically checking for drone violations and saving them to the database.
-
-Using Celery directly:
-```bash
-	celery -A celery_app worker --beat --loglevel=info
-```
-
-If you're using Poetry:
-```bash
-	poetry run celery -A app.celery_app worker --beat --loglevel=info
-```
-This command starts both the worker and the beat scheduler. The worker processes tasks, and beat periodically triggers scheduled jobs (like fetching drone data).
-
-### 3. API Endpoints
+### 2. API Endpoints
 Once the app is running, you can access the following endpoints:
 
 Swagger/OpenAPI Docs: 
@@ -176,4 +129,13 @@ cd static
 python3 -m http.server 8080
 ```
 Then open your browser to: http://localhost:8080/
+
+
+
+
+Mixing requests + httpx
+OK for now — we won’t change behavior unless you ask.
+
+Using synchronous requests for owner API
+This is fine for now, no need to change unless you want async.
 

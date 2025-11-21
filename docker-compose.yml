@@ -1,0 +1,114 @@
+# ================================================================
+# 🚀 Drone Monitoring System – Docker Compose
+# ================================================================
+services:
+
+  # --------------------------------------------------------------
+  # 🔥 FastAPI Backend
+  # --------------------------------------------------------------
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: backend
+    env_file: .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --no-access-log
+    restart: unless-stopped
+    environment:
+      LOG_TO_FILE: "0"
+
+  # --------------------------------------------------------------
+  # 🐝 Celery Worker
+  # --------------------------------------------------------------
+  celery_worker:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: celery-worker
+    env_file: .env
+    depends_on:
+      backend:
+        condition: service_started
+      redis:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+    command: celery -A app.celery_app worker --loglevel=info
+    restart: unless-stopped
+
+  # --------------------------------------------------------------
+  # ⏱ Celery Beat Scheduler
+  # --------------------------------------------------------------
+  celery_beat:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: celery-beat
+    env_file: .env
+    depends_on:
+      backend:
+        condition: service_started
+      redis:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+    command: celery -A app.celery_app beat --loglevel=info
+    restart: unless-stopped
+
+  # --------------------------------------------------------------
+  # 🐘 PostgreSQL Database
+  # --------------------------------------------------------------
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    env_file: .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # --------------------------------------------------------------
+  # 🧠 Redis (Celery broker)
+  # --------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6380:6379"
+    restart: unless-stopped
+
+  # --------------------------------------------------------------
+  # 🌐 Static Frontend
+  # --------------------------------------------------------------
+  frontend:
+    image: python:3.11-slim
+    container_name: frontend
+    working_dir: /app/static
+    volumes:
+      - ./static:/app/static
+    command: python3 -m http.server 8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      backend:
+        condition: service_started
+    restart: unless-stopped
+
+# ================================================================
+# 📦 Volumes
+# ================================================================
+volumes:
+  postgres_data:

@@ -7,12 +7,12 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session, joinedload
 from datetime import datetime, timedelta
 from typing import List
-from dotenv import load_dotenv
+from app.config import settings
 
 import httpx
 import os
 
-########### OWN ##########################
+# --------------------OWN--------------------------------
 from app.fetcher import fetch_drones, fetch_owner
 from app.drone_db import SessionLocal, engine
 from app.schemas import ViolationOut, ViolationInput, OwnerOut
@@ -25,21 +25,21 @@ from app.error_handlers import (
 	http_exception_handler,
 	unhandled_exception_handler
 )
-####################################
-
-load_dotenv()
-X_SECRET = os.getenv("X_SECRET")
-DRONES_LIST_API = os.getenv("DRONES_LIST_API")
+# ---------------------------------------------------------
 
 app = FastAPI()
 
-######################################################
+# ---------------------------------------------------------
+# Exception Handlers
+# ---------------------------------------------------------
 app.add_exception_handler(RequestValidationError, validation_exception_handler)
 app.add_exception_handler(HTTPException, http_exception_handler)
 app.add_exception_handler(Exception, unhandled_exception_handler)
-######################################################
+# ---------------------------------------------------------
 
-#Allows frontend js to communicate with FASTAPI backend
+# ---------------------------------------------------------
+# CORS (backend <-> frontend)
+# ---------------------------------------------------------
 app.add_middleware(
 	CORSMiddleware,
 	allow_origins=["http://localhost:8080"],
@@ -47,18 +47,31 @@ app.add_middleware(
 	allow_methods=["*"],
 	allow_headers=["*"],
 )
-######################################################
+
+# ---------------------------------------------------------
+# Startup: ensure tables exist
+# ---------------------------------------------------------
 
 @app.on_event("startup")
 def on_startup():
 	Base.metadata.create_all(bind=engine)
 	print("  🗃️       Tables created.")
 
+
+# ---------------------------------------------------------
+# Health check
+# ---------------------------------------------------------
+
 @app.get("/health")
 def health_check():
 	return {"success": "ok"}
 
 logger.info("App starting...")
+
+# ---------------------------------------------------------
+# Drones proxy
+# ---------------------------------------------------------
+
 @app.get("/drones")
 async def proxy_drones(limit: int = Query(10, gt=0, le=100)):
 	try:
@@ -71,7 +84,10 @@ async def proxy_drones(limit: int = Query(10, gt=0, le=100)):
 	logger.info(f"Returning first {limit} drones")
 	return drones[:limit]
 
-# GET /nfz: Returns violations from the last 24 hours
+# ---------------------------------------------------------
+# Secure NFZ violations endpoint
+# ---------------------------------------------------------
+
 @app.get("/nfz")
 def get_violations(
 	x_secret: str = Header(...),
@@ -94,7 +110,9 @@ def get_violations(
 	return [ViolationOut.from_orm(v) for v in violations]
 
 
-# Use a proxy/backend to attach the secret
+# ---------------------------------------------------------
+# Frontend-safe NFZ: does NOT expose secret to browser
+# ---------------------------------------------------------
 @app.get("/frontend-nfz")
 def frontend_proxy_nfz(db: Session = Depends(get_db)):
 	# This does NOT expose the secret to the client
@@ -112,6 +130,9 @@ def frontend_proxy_nfz(db: Session = Depends(get_db)):
 	)
 	return [ViolationOut.from_orm(v) for v in violations]
 
+# ---------------------------------------------------------
+# Map data
+# ---------------------------------------------------------
 @app.get("/api/map-data")
 async def get_map_data():
 	try:

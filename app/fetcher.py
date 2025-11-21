@@ -1,25 +1,26 @@
-import os
 import httpx
 import requests
-from dotenv import load_dotenv
 
-load_dotenv()  # Make sure to load .env variables
+from app.config import settings
 
-DRONES_API = os.getenv("DRONES_API")
-DRONES_LIST_API = os.getenv("DRONES_LIST_API")
+
+# Read API URLs from config
+DRONES_API = settings.DRONES_API
+DRONES_LIST_API = settings.DRONES_LIST_API
+
 
 def fetch_owner(owner_id: str):
-	base_url = os.getenv("DRONES_API")
-	url = f"{base_url}{owner_id}"
+    url = f"{DRONES_API}{owner_id}"
+    response = requests.get(url)
 
-	response = requests.get(url) 
+    if response.status_code == 200:
+        return response.json()
 
-	if response.status_code == 200:
-		return response.json()
-	return None
+    return None
+
 
 async def fetch_drones():
-	async with httpx.AsyncClient() as client:
-		response = await client.get(DRONES_LIST_API)
-		response.raise_for_status()
-		return response.json()
+    async with httpx.AsyncClient() as client:
+        response = await client.get(DRONES_LIST_API)
+        response.raise_for_status()
+        return response.json()
