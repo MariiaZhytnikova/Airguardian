@@ -64,18 +64,8 @@ No-Fly Zones API (This API requires a secret header for authorization, Make sure
 
 	http://localhost:8000/nfz
 
+### 4. Run the Frontend (Static)
 Real-time map: 
 
-	http://localhost:8080/map-data
-
-### 4. Run the Frontend (Static)
-You can serve a static frontend using Python's built-in HTTP server:
-
-```bash
-cd static
-python3 -m http.server 8080
-```
-Then open your browser to:
-	
 	http://localhost:8080/
 
