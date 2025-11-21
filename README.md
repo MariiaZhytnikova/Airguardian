@@ -75,14 +75,7 @@ You can serve a static frontend using Python's built-in HTTP server:
 cd static
 python3 -m http.server 8080
 ```
-Then open your browser to: http://localhost:8080/
-
-
-
-
-Mixing requests + httpx
-OK for now — we won’t change behavior unless you ask.
-
-Using synchronous requests for owner API
-This is fine for now, no need to change unless you want async.
+Then open your browser to:
+	
+	http://localhost:8080/
 
